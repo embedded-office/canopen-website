@@ -45,6 +45,4 @@ $ mike delete [version-or-alias]
 
 ### Automatic deployment
 
-The GitHub Action `website.yml` is defined to deploy (or overwrite) a website version. This action is triggered when a new version tag is created (naming pattern `v*.*.*`). A website update is triggered, when a file is changed within the repository.
-
-**TODO: version identification in workflow is fixed to v4.3 (needs update before moving forward to v4.4)**
+The GitHub Action `website.yml` is defined to deploy (or overwrite) a website version. This action is triggered when a new release is pushed.
