@@ -1,0 +1,1929 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="CANopen Stack Documentation">
+      
+      
+        <meta name="author" content="Embedded Office">
+      
+      
+        <link rel="canonical" href="https://canopen-stack.org/v4.3/start/quickstart/">
+      
+      <link rel="icon" href="../../assets/images/favicon/favicon.ico">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.9">
+    
+    
+      
+        <title>Quickstart Example - CANopen Stack</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.1d29e8d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#quickstart" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-component="outdated" hidden>
+        <aside class="md-banner md-banner--warning">
+          
+        </aside>
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="CANopen Stack" class="md-header__button md-logo" aria-label="CANopen Stack" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 17H7V7h10m4 4V9h-2V7a2 2 0 0 0-2-2h-2V3h-2v2h-2V3H9v2H7c-1.11 0-2 .89-2 2v2H3v2h2v2H3v2h2v2a2 2 0 0 0 2 2h2v2h2v-2h2v2h2v-2h2a2 2 0 0 0 2-2v-2h2v-2h-2v-2m-6 2h-2v-2h2m2-2H9v6h6V9Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            CANopen Stack
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Quickstart Example
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/embedded-office/canopen-stack/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    canopen-stack
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../.." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../installation/" class="md-tabs__link md-tabs__link--active">
+        Quickstart
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../usage/architecture/" class="md-tabs__link">
+        CANopen Usage
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../api/node/" class="md-tabs__link">
+        API Functions
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../examples/flash-user-domain/" class="md-tabs__link">
+        Examples
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../hardware/can/" class="md-tabs__link">
+        Hardware Connection
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../license/" class="md-tabs__link">
+      License
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="CANopen Stack" class="md-nav__button md-logo" aria-label="CANopen Stack" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 17H7V7h10m4 4V9h-2V7a2 2 0 0 0-2-2h-2V3h-2v2h-2V3H9v2H7c-1.11 0-2 .89-2 2v2H3v2h2v2H3v2h2v2a2 2 0 0 0 2 2h2v2h2v-2h2v2h2v-2h2a2 2 0 0 0 2-2v-2h2v-2h-2v-2m-6 2h-2v-2h2m2-2H9v6h6V9Z"/></svg>
+
+    </a>
+    CANopen Stack
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/embedded-office/canopen-stack/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    canopen-stack
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Quickstart
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Quickstart" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Quickstart
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        Install Environment
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../structure/" class="md-nav__link">
+        Repository Structure
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Quickstart Example
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Quickstart Example
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#functional-specification" class="md-nav__link">
+    Functional Specification
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#object-dictionary" class="md-nav__link">
+    Object Dictionary
+  </a>
+  
+    <nav class="md-nav" aria-label="Object Dictionary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mandatory-object-entries" class="md-nav__link">
+    Mandatory Object Entries
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sdo-server" class="md-nav__link">
+    SDO Server
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#application-object-entries" class="md-nav__link">
+    Application Object Entries
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tpdo-communication" class="md-nav__link">
+    TPDO Communication
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tpdo-data-mapping" class="md-nav__link">
+    TPDO Data Mapping
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#emcy-error-specification" class="md-nav__link">
+    EMCY Error Specification
+  </a>
+  
+    <nav class="md-nav" aria-label="EMCY Error Specification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#emcy-codes" class="md-nav__link">
+    EMCY Codes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#node-specification" class="md-nav__link">
+    Node Specification
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#application-start" class="md-nav__link">
+    Application Start
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#application-callback" class="md-nav__link">
+    Application Callback
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hardware-connection" class="md-nav__link">
+    Hardware Connection
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          CANopen Usage
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="CANopen Usage" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          CANopen Usage
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usage/architecture/" class="md-nav__link">
+        Device Architecture
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usage/overview/" class="md-nav__link">
+        CANopen Stack Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usage/control/" class="md-nav__link">
+        Controlling the Node
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usage/dictionary/" class="md-nav__link">
+        Using Object Dictionary
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usage/tpdo/" class="md-nav__link">
+        Transmit PDO
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usage/emergency/" class="md-nav__link">
+        Emergency Errors
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usage/actions/" class="md-nav__link">
+        Timed Actions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usage/callbacks/" class="md-nav__link">
+        Callback Interface
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../usage/configuration/" class="md-nav__link">
+        Configuration
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          API Functions
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="API Functions" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          API Functions
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/node/" class="md-nav__link">
+        CANopen Node
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/dictionary/" class="md-nav__link">
+        Object Dictionary
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/emergency/" class="md-nav__link">
+        Emergency
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/network/" class="md-nav__link">
+        Network Management
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/object/" class="md-nav__link">
+        Object Entry
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/tpdo/" class="md-nav__link">
+        TPDO Event
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/interface/" class="md-nav__link">
+        CAN Interface
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/timer/" class="md-nav__link">
+        Timer Handling
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/parameter/" class="md-nav__link">
+        Parameter Storage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/csdo/" class="md-nav__link">
+        SDO Client
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Examples
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Examples" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Examples
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/flash-user-domain/" class="md-nav__link">
+        Firmware Upload
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/setup-calibration-mode/" class="md-nav__link">
+        Calibration Mode
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/write-serial-number/" class="md-nav__link">
+        Write Serial Number
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/setup-dynamic-object-dictionary/" class="md-nav__link">
+        Dynamic Dictionary I
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/use-dynamic-object-dictionary/" class="md-nav__link">
+        Dynamic Dictionary II
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/usage-with-rtos-and-baremetal/" class="md-nav__link">
+        RTOS and Baremetal
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          Hardware Connection
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Hardware Connection" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Hardware Connection
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardware/can/" class="md-nav__link">
+        CAN Driver
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardware/timer/" class="md-nav__link">
+        Timer Driver
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardware/nvm/" class="md-nav__link">
+        NVM Driver
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../license/" class="md-nav__link">
+        License
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#functional-specification" class="md-nav__link">
+    Functional Specification
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#object-dictionary" class="md-nav__link">
+    Object Dictionary
+  </a>
+  
+    <nav class="md-nav" aria-label="Object Dictionary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mandatory-object-entries" class="md-nav__link">
+    Mandatory Object Entries
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sdo-server" class="md-nav__link">
+    SDO Server
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#application-object-entries" class="md-nav__link">
+    Application Object Entries
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tpdo-communication" class="md-nav__link">
+    TPDO Communication
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tpdo-data-mapping" class="md-nav__link">
+    TPDO Data Mapping
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#emcy-error-specification" class="md-nav__link">
+    EMCY Error Specification
+  </a>
+  
+    <nav class="md-nav" aria-label="EMCY Error Specification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#emcy-codes" class="md-nav__link">
+    EMCY Codes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#node-specification" class="md-nav__link">
+    Node Specification
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#application-start" class="md-nav__link">
+    Application Start
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#application-callback" class="md-nav__link">
+    Application Callback
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hardware-connection" class="md-nav__link">
+    Hardware Connection
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+  <a href="https://github.com/embedded-office/canopen-stack/edit/master/docs/start/quickstart.md" title="Edit this page" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+
+<h1 id="quickstart">Quickstart<a class="headerlink" href="#quickstart" title="Permanent link">#</a></h1>
+<p>This quickstart example describes in detail the steps to build a CANopen node. The source files are included in the directory <a href="https://github.com/embedded-office/canopen-stack/blob/master/example/quickstart/app/">example/quickstart/app</a> and should be followed during reading this article. In this example, we will create a <em>CANopen Clock</em>. While this clock node is not intended for serious applications, the example illustrates the key principles of development using the CANopen Stack.</p>
+<h2 id="functional-specification">Functional Specification<a class="headerlink" href="#functional-specification" title="Permanent link">#</a></h2>
+<p>The CANopen clock will only run if the device is switched to <em>operational</em> mode. The object dictionary will be updated every second with the new time. In <em>operational</em> mode, the node will transmit a process data object (<code>TPDO</code>) whenever the object dictionary entry <em>"second"</em> (<code>2100h:03</code>) is changed. The service data object server (<code>SDOS</code>) will allow access to the device information contained within the object dictionary.</p>
+<h2 id="object-dictionary">Object Dictionary<a class="headerlink" href="#object-dictionary" title="Permanent link">#</a></h2>
+<p>To keep the software as simple as possible, we will use a static object dictionary. In this case, the object dictionary is an array of object entries, declared as a constant array of object entries of type <code>CO_OBJ</code>. The object dictionary is declared in the file <a href="https://github.com/embedded-office/canopen-stack/blob/master/example/quickstart/app/clock_spec.c#L50">clock_spec.c</a>:</p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="o">:</span><span class="w"></span>
+<span class="cm">/* define the static object dictionary */</span><span class="w"></span>
+<span class="k">const</span><span class="w"> </span><span class="n">CO_OBJ</span><span class="w"> </span><span class="n">ClockOD</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="o">:</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/* here is your object dictionary */</span><span class="w"></span>
+<span class="w">    </span><span class="o">:</span><span class="w"></span>
+<span class="w">  </span><span class="n">CO_OBJ_DIR_ENDMARK</span><span class="w">  </span><span class="cm">/* mark end of used objects */</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+<span class="cm">/* set number of object entries */</span><span class="w"></span>
+<span class="k">const</span><span class="w"> </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">ClockODLen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">ClockOD</span><span class="p">)</span><span class="o">/</span><span class="k">sizeof</span><span class="p">(</span><span class="n">CO_OBJ</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="o">:</span><span class="w"></span>
+</code></pre></div>
+<h3 id="mandatory-object-entries">Mandatory Object Entries<a class="headerlink" href="#mandatory-object-entries" title="Permanent link">#</a></h3>
+<p>The object dictionary must hold at least the following mandatory object entries:</p>
+<table>
+<thead>
+<tr>
+<th>Index:sub</th>
+<th>Type</th>
+<th>Access</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1000h:00</td>
+<td>UNSIGNED32</td>
+<td>Const</td>
+<td>0</td>
+<td>Device Type</td>
+</tr>
+<tr>
+<td>1001h:00</td>
+<td>UNSIGNED8</td>
+<td>Read-only</td>
+<td>0</td>
+<td>Error Register</td>
+</tr>
+<tr>
+<td>1005h:00</td>
+<td>UNSIGNED32</td>
+<td>Const</td>
+<td>0x80</td>
+<td>COB-ID SYNC</td>
+</tr>
+<tr>
+<td>1017h:00</td>
+<td>UNSIGNED16</td>
+<td>Const</td>
+<td>0</td>
+<td>Heartbeat Producer</td>
+</tr>
+<tr>
+<td>1018h:00</td>
+<td>UNSIGNED8</td>
+<td>Const</td>
+<td>4</td>
+<td><em>Identity Object</em></td>
+</tr>
+<tr>
+<td>1018h:01</td>
+<td>UNSIGNED32</td>
+<td>Const</td>
+<td>0</td>
+<td>- Vendor ID</td>
+</tr>
+<tr>
+<td>1018h:02</td>
+<td>UNSIGNED32</td>
+<td>Const</td>
+<td>0</td>
+<td>- Product code</td>
+</tr>
+<tr>
+<td>1018h:03</td>
+<td>UNSIGNED32</td>
+<td>Const</td>
+<td>0</td>
+<td>- Revision number</td>
+</tr>
+<tr>
+<td>1018h:04</td>
+<td>UNSIGNED32</td>
+<td>Const</td>
+<td>0</td>
+<td>- Serial number</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">Remember</p>
+<p>For complex object dictionary entries (e.g. <code>1018h</code>), subindex <code>0</code> holds the <strong>highest subindex</strong> of this object.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>The values shown for <code>1018h</code> are only dummy values. Vendor IDs are managed by CiA, and each registered company is assigned to a globally unique value.</p>
+</div>
+<p>These mandatory entries are added with the following lines of code:</p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="o">:</span><span class="w"></span>
+<span class="p">{</span><span class="n">CO_KEY</span><span class="p">(</span><span class="mh">0x1000</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">CO_UNSIGNED32</span><span class="o">|</span><span class="n">CO_OBJ_D__R_</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">CO_DATA</span><span class="p">)(</span><span class="mi">0</span><span class="p">)},</span><span class="w"></span>
+<span class="p">{</span><span class="n">CO_KEY</span><span class="p">(</span><span class="mh">0x1001</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">CO_UNSIGNED8</span><span class="w"> </span><span class="o">|</span><span class="n">CO_OBJ____R_</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">CO_DATA</span><span class="p">)(</span><span class="o">&amp;</span><span class="n">Obj1001_00_08</span><span class="p">)},</span><span class="w"></span>
+<span class="p">{</span><span class="n">CO_KEY</span><span class="p">(</span><span class="mh">0x1005</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">CO_UNSIGNED32</span><span class="o">|</span><span class="n">CO_OBJ_D__R_</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">CO_DATA</span><span class="p">)(</span><span class="mh">0x80</span><span class="p">)},</span><span class="w"></span>
+<span class="p">{</span><span class="n">CO_KEY</span><span class="p">(</span><span class="mh">0x1017</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">CO_UNSIGNED16</span><span class="o">|</span><span class="n">CO_OBJ_D__R_</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">CO_DATA</span><span class="p">)(</span><span class="mi">0</span><span class="p">)},</span><span class="w"></span>
+<span class="p">{</span><span class="n">CO_KEY</span><span class="p">(</span><span class="mh">0x1018</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">CO_UNSIGNED8</span><span class="w"> </span><span class="o">|</span><span class="n">CO_OBJ_D__R_</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">CO_DATA</span><span class="p">)(</span><span class="mi">4</span><span class="p">)},</span><span class="w"></span>
+<span class="p">{</span><span class="n">CO_KEY</span><span class="p">(</span><span class="mh">0x1018</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">CO_UNSIGNED32</span><span class="o">|</span><span class="n">CO_OBJ_D__R_</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">CO_DATA</span><span class="p">)(</span><span class="mi">0</span><span class="p">)},</span><span class="w"></span>
+<span class="p">{</span><span class="n">CO_KEY</span><span class="p">(</span><span class="mh">0x1018</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">CO_UNSIGNED32</span><span class="o">|</span><span class="n">CO_OBJ_D__R_</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">CO_DATA</span><span class="p">)(</span><span class="mi">0</span><span class="p">)},</span><span class="w"></span>
+<span class="p">{</span><span class="n">CO_KEY</span><span class="p">(</span><span class="mh">0x1018</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">CO_UNSIGNED32</span><span class="o">|</span><span class="n">CO_OBJ_D__R_</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">CO_DATA</span><span class="p">)(</span><span class="mi">0</span><span class="p">)},</span><span class="w"></span>
+<span class="p">{</span><span class="n">CO_KEY</span><span class="p">(</span><span class="mh">0x1018</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">CO_UNSIGNED32</span><span class="o">|</span><span class="n">CO_OBJ_D__R_</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">CO_DATA</span><span class="p">)(</span><span class="mi">0</span><span class="p">)},</span><span class="w"></span>
+<span class="w">  </span><span class="o">:</span><span class="w"></span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Important</p>
+<p>The CANopen Stack relies on a binary search algorithm to ensure that object dictionary entries are found quickly. Because of this, you must keep the index / subindex of all entries in the object dictionary sorted in ascending order.</p>
+</div>
+<p>Most of these entries are constant, and their values can be stored directly inside the object dictionary. This is not the case for the error register object <code>1001h</code>. This entry is read-only, but can be changed by the node. We need to declare a global variable to contain the runtime value of the entry:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">uint8_t</span><span class="w"> </span><span class="n">Obj1001_00_08</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+<p>A pointer to this variable is stored in the corresponding object dictionary entry. This entry must be marked as <code>CO_OBJ____R_</code> instead of <code>CO_OBJ_D__R_</code> to let the stack know that this entry contains a pointer instead of a direct value.</p>
+<div class="admonition warning">
+<p class="admonition-title">Important</p>
+<p>When using architectures with pointer types lower than 32bit (e.g. 16bit microcontrollers), you can store only values up to the pointer width directly in the object dictionary. For larger values declare a constant variable and place a pointer to this constant into the object dictionary:</p>
+<div class="highlight"><pre><span></span><code><span class="k">const</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">Obj1000_00_32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x00000000L</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+<p>and</p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="o">:</span><span class="w"></span>
+<span class="p">{</span><span class="n">CO_KEY</span><span class="p">(</span><span class="mh">0x1000</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">CO_UNSIGNED32</span><span class="o">|</span><span class="n">CO_OBJ____R_</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">CO_DATA</span><span class="p">)(</span><span class="o">&amp;</span><span class="n">Obj1000_00_32</span><span class="p">)},</span><span class="w"></span>
+<span class="w">  </span><span class="o">:</span><span class="w"></span>
+</code></pre></div>
+</div>
+<h3 id="sdo-server">SDO Server<a class="headerlink" href="#sdo-server" title="Permanent link">#</a></h3>
+<p>The settings for the SDO server are defined in CiA301 and must contain the following object dictionary entries:</p>
+<table>
+<thead>
+<tr>
+<th>Index:sub</th>
+<th>Type</th>
+<th>Access</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1200h:00</td>
+<td>UNSIGNED8</td>
+<td>Const</td>
+<td>2</td>
+<td><em>Communication Object SDO Server</em></td>
+</tr>
+<tr>
+<td>1200h:01</td>
+<td>UNSIGNED32</td>
+<td>Const</td>
+<td>600h + node ID</td>
+<td>- SDO Server Request COBID</td>
+</tr>
+<tr>
+<td>1200h:02</td>
+<td>UNSIGNED32</td>
+<td>Const</td>
+<td>580h + node ID</td>
+<td>- SDO Server Response COBID</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>The predefined COBIDs are dependent on the actual node ID. For this reason, the CANopen stack allows you to specify entries whose value depends on the current node ID at runtime. This behavior is specified using the <code>CO_OBJ__N___</code> flag.</p>
+</div>
+<p>The following lines add the SDO server entries to the object dictionary:</p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="o">:</span><span class="w"></span>
+<span class="p">{</span><span class="n">CO_KEY</span><span class="p">(</span><span class="mh">0x1200</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">CO_UNSIGNED8</span><span class="w"> </span><span class="o">|</span><span class="n">CO_OBJ_D__R_</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">CO_DATA</span><span class="p">)(</span><span class="mi">2</span><span class="p">)},</span><span class="w"></span>
+<span class="p">{</span><span class="n">CO_KEY</span><span class="p">(</span><span class="mh">0x1200</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">CO_UNSIGNED32</span><span class="o">|</span><span class="n">CO_OBJ_DN_R_</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">CO_DATA</span><span class="p">)(</span><span class="n">CO_COBID_SDO_REQUEST</span><span class="p">())},</span><span class="w"></span>
+<span class="p">{</span><span class="n">CO_KEY</span><span class="p">(</span><span class="mh">0x1200</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">CO_UNSIGNED32</span><span class="o">|</span><span class="n">CO_OBJ_DN_R_</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">CO_DATA</span><span class="p">)(</span><span class="n">CO_COBID_SDO_RESPONSE</span><span class="p">())},</span><span class="w"></span>
+<span class="w">  </span><span class="o">:</span><span class="w"></span>
+</code></pre></div>
+<h3 id="application-object-entries">Application Object Entries<a class="headerlink" href="#application-object-entries" title="Permanent link">#</a></h3>
+<p>Next, we need to add some application-specific object entries to support the clock-functionality of the example:</p>
+<table>
+<thead>
+<tr>
+<th>Index:sub</th>
+<th>Type</th>
+<th>Access</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2100h:00</td>
+<td>UNSIGNED8</td>
+<td>Const</td>
+<td>3</td>
+<td><em>Clock Object</em></td>
+</tr>
+<tr>
+<td>2100h:01</td>
+<td>UNSIGNED32</td>
+<td>Read Only</td>
+<td>0</td>
+<td>- Hour</td>
+</tr>
+<tr>
+<td>2100h:02</td>
+<td>UNSIGNED8</td>
+<td>Read Only</td>
+<td>0</td>
+<td>- Minute</td>
+</tr>
+<tr>
+<td>2100h:03</td>
+<td>UNSIGNED8</td>
+<td>Read Only</td>
+<td>0</td>
+<td>- Second</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>These entries are placed within the manufacturer-specific area (from <code>2000h</code> up to <code>5FFFh</code>) and can be chosen freely (see CiA301). Entries outside of this range cannot be chosen freely, and should conform to the various CiA standards and profiles (e.g. CiA301 for communication profile area, CiA401 for generic IO modules, etc).</p>
+</div>
+<p>These entries are created using the following lines of code:</p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="o">:</span><span class="w"></span>
+<span class="p">{</span><span class="n">CO_KEY</span><span class="p">(</span><span class="mh">0x2100</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">CO_UNSIGNED8</span><span class="w"> </span><span class="o">|</span><span class="n">CO_OBJ_D__R_</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">CO_DATA</span><span class="p">)(</span><span class="mi">3</span><span class="p">)},</span><span class="w"></span>
+<span class="p">{</span><span class="n">CO_KEY</span><span class="p">(</span><span class="mh">0x2100</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">CO_UNSIGNED32</span><span class="o">|</span><span class="n">CO_OBJ___PR_</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">CO_DATA</span><span class="p">)(</span><span class="o">&amp;</span><span class="n">Obj2100_01_20</span><span class="p">)},</span><span class="w"></span>
+<span class="p">{</span><span class="n">CO_KEY</span><span class="p">(</span><span class="mh">0x2100</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">CO_UNSIGNED8</span><span class="w"> </span><span class="o">|</span><span class="n">CO_OBJ___PR_</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">CO_DATA</span><span class="p">)(</span><span class="o">&amp;</span><span class="n">Obj2100_02_08</span><span class="p">)},</span><span class="w"></span>
+<span class="p">{</span><span class="n">CO_KEY</span><span class="p">(</span><span class="mh">0x2100</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">CO_UNSIGNED8</span><span class="w"> </span><span class="o">|</span><span class="n">CO_OBJ___PR_</span><span class="p">),</span><span class="w"> </span><span class="n">CO_TASYNC</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">CO_DATA</span><span class="p">)(</span><span class="o">&amp;</span><span class="n">Obj2100_03_08</span><span class="p">)},</span><span class="w"></span>
+<span class="w">  </span><span class="o">:</span><span class="w"></span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>The type <code>CO_TASYNC</code> for the object entry <code>2100h:03</code> indicates the transmission of all PDOs, which includes this object. We use this mechanism to achieve the PDO transmission on each write access to the second.</p>
+</div>
+<p>We also need to create three global variables to hold the runtime values of the clock object:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">uint32_t</span><span class="w"> </span><span class="n">Obj2100_01_20</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="kt">uint8_t</span><span class="w">  </span><span class="n">Obj2100_02_08</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="kt">uint8_t</span><span class="w">  </span><span class="n">Obj2100_03_08</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+<h3 id="tpdo-communication">TPDO Communication<a class="headerlink" href="#tpdo-communication" title="Permanent link">#</a></h3>
+<p>The communication settings for the TPDO must contain the following object entries:</p>
+<table>
+<thead>
+<tr>
+<th>Index:sub</th>
+<th>Type</th>
+<th>Access</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1800h:00</td>
+<td>UNSIGNED8</td>
+<td>Const</td>
+<td>2</td>
+<td><em>Communication Object TPDO #0</em></td>
+</tr>
+<tr>
+<td>1800h:01</td>
+<td>UNSIGNED32</td>
+<td>Const</td>
+<td>40000180h</td>
+<td>- PDO transmission COBID (no RTR)</td>
+</tr>
+<tr>
+<td>1800h:02</td>
+<td>UNSIGNED8</td>
+<td>Const</td>
+<td>254</td>
+<td>- PDO transmission type</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>The CANopen stack does not support remote CAN frames as they are no longer recommended for new devices. The use of RTR frames in CANopen devices has been deprecated for many years now. Bit 30 in <code>1800h:01</code> indicates that remote transfers are not allowed for this PDO. The CAN identifier <code>180h + node-ID</code> is the recommended value from the pre-defined connection set.</p>
+</div>
+<p>See the following lines in the object dictionary:</p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="o">:</span><span class="w"></span>
+<span class="p">{</span><span class="n">CO_KEY</span><span class="p">(</span><span class="mh">0x1800</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">CO_UNSIGNED8</span><span class="w"> </span><span class="o">|</span><span class="n">CO_OBJ_D__R_</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">CO_DATA</span><span class="p">)(</span><span class="mi">2</span><span class="p">)},</span><span class="w"></span>
+<span class="p">{</span><span class="n">CO_KEY</span><span class="p">(</span><span class="mh">0x1800</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">CO_UNSIGNED32</span><span class="o">|</span><span class="n">CO_OBJ_DN_R_</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">CO_DATA</span><span class="p">)(</span><span class="n">CO_COBID_TPDO_DEFAULT</span><span class="p">(</span><span class="mi">0</span><span class="p">))},</span><span class="w"></span>
+<span class="p">{</span><span class="n">CO_KEY</span><span class="p">(</span><span class="mh">0x1800</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">CO_UNSIGNED8</span><span class="w"> </span><span class="o">|</span><span class="n">CO_OBJ_D__R_</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">CO_DATA</span><span class="p">)(</span><span class="mi">254</span><span class="p">)},</span><span class="w"></span>
+<span class="w">  </span><span class="o">:</span><span class="w"></span>
+</code></pre></div>
+<h3 id="tpdo-data-mapping">TPDO Data Mapping<a class="headerlink" href="#tpdo-data-mapping" title="Permanent link">#</a></h3>
+<p>The mapping settings for the TPDO must contain the following object entries:</p>
+<table>
+<thead>
+<tr>
+<th>Index:sub</th>
+<th>Type</th>
+<th>Access</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1A00h:00</td>
+<td>UNSIGNED8</td>
+<td>Const</td>
+<td>3</td>
+<td><em>Mapping Object TPDO #0</em></td>
+</tr>
+<tr>
+<td>1A00h:01</td>
+<td>UNSIGNED32</td>
+<td>Const</td>
+<td>21000120h</td>
+<td>- map: 32-bit clock hour</td>
+</tr>
+<tr>
+<td>1A00h:02</td>
+<td>UNSIGNED32</td>
+<td>Const</td>
+<td>21000208h</td>
+<td>- map:  8-bit clock minute</td>
+</tr>
+<tr>
+<td>1A00h:03</td>
+<td>UNSIGNED32</td>
+<td>Const</td>
+<td>21000308h</td>
+<td>- map:  8-bit clock second</td>
+</tr>
+</tbody>
+</table>
+<p>How we get these values is explained in section <a href="../usage/configuration#pdo-mapping-value">configuration of PDO mapping</a>. This way of defining the payload for PDOs is part of the CiA301 standard and leads us to the following lines in the object dictionary:</p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="o">:</span><span class="w"></span>
+<span class="p">{</span><span class="n">CO_KEY</span><span class="p">(</span><span class="mh">0x1A00</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">CO_UNSIGNED8</span><span class="w"> </span><span class="o">|</span><span class="n">CO_OBJ_D__R_</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">CO_DATA</span><span class="p">)(</span><span class="mi">3</span><span class="p">)},</span><span class="w"></span>
+<span class="p">{</span><span class="n">CO_KEY</span><span class="p">(</span><span class="mh">0x1A00</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">CO_UNSIGNED32</span><span class="o">|</span><span class="n">CO_OBJ_D__R_</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">CO_DATA</span><span class="p">)(</span><span class="n">CO_LINK</span><span class="p">(</span><span class="mh">0x2100</span><span class="p">,</span><span class="w"> </span><span class="mh">0x01</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">))},</span><span class="w"></span>
+<span class="p">{</span><span class="n">CO_KEY</span><span class="p">(</span><span class="mh">0x1A00</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">CO_UNSIGNED32</span><span class="o">|</span><span class="n">CO_OBJ_D__R_</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">CO_DATA</span><span class="p">)(</span><span class="n">CO_LINK</span><span class="p">(</span><span class="mh">0x2100</span><span class="p">,</span><span class="w"> </span><span class="mh">0x02</span><span class="p">,</span><span class="w">  </span><span class="mi">8</span><span class="p">))},</span><span class="w"></span>
+<span class="p">{</span><span class="n">CO_KEY</span><span class="p">(</span><span class="mh">0x1A00</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">CO_UNSIGNED32</span><span class="o">|</span><span class="n">CO_OBJ_D__R_</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">CO_DATA</span><span class="p">)(</span><span class="n">CO_LINK</span><span class="p">(</span><span class="mh">0x2100</span><span class="p">,</span><span class="w"> </span><span class="mh">0x03</span><span class="p">,</span><span class="w">  </span><span class="mi">8</span><span class="p">))},</span><span class="w"></span>
+<span class="w">  </span><span class="o">:</span><span class="w"></span>
+</code></pre></div>
+<h2 id="emcy-error-specification">EMCY Error Specification<a class="headerlink" href="#emcy-error-specification" title="Permanent link">#</a></h2>
+<p>We use in the application abstract EMCY error identifiers (<code>0</code> to <code>Number of EMCY - 1</code>). To simplify maintenance, we should define these identifiers as enumerations. Refer to the file <a href="https://github.com/embedded-office/canopen-stack/blob/master/example/quickstart/app/clock_spec.h#L34">clock_spec.h</a> for more detail:</p>
+<div class="highlight"><pre><span></span><code><span class="k">enum</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">APP_ERR_ID_SOMETHING</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="n">APP_ERR_ID_HAPPENS</span><span class="p">,</span><span class="w"></span>
+
+<span class="w">  </span><span class="n">APP_ERR_ID_NUM</span><span class="w">            </span><span class="cm">/* number of EMCY error identifiers in application */</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>With these enumerations in place, we can call the EMCY service functions in our application (e.g. in timer callback function like: <code>COEmcySet(&amp;node-&gt;Emcy, APP_ERR_ID_HOT, 0);</code>).</p>
+</div>
+<h3 id="emcy-codes">EMCY Codes<a class="headerlink" href="#emcy-codes" title="Permanent link">#</a></h3>
+<p>The CANopen stack behavior for each of these EMCY error identifier is defined in a EMCY table. Here we define the EMCY code and the error register bit correlation. We don't use them in the simple clock application, but an example definition is shown in <a href="https://github.com/embedded-office/canopen-stack/blob/master/example/quickstart/app/clock_spec.c#L110">clock_spec.c</a>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">static</span><span class="w"> </span><span class="n">CO_EMCY_TBL</span><span class="w"> </span><span class="n">AppEmcyTbl</span><span class="p">[</span><span class="n">APP_ERR_ID_NUM</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="n">CO_EMCY_REG_GENERAL</span><span class="p">,</span><span class="w"> </span><span class="n">CO_EMCY_CODE_GEN_ERR</span><span class="w">          </span><span class="p">},</span><span class="w"> </span><span class="cm">/* APP_ERR_CODE_SOMETHING */</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="n">CO_EMCY_REG_TEMP</span><span class="w">   </span><span class="p">,</span><span class="w"> </span><span class="n">CO_EMCY_CODE_TEMP_AMBIENT_ERR</span><span class="w"> </span><span class="p">}</span><span class="w">  </span><span class="cm">/* APP_ERR_CODE_HOT       */</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+</code></pre></div>
+<p>The constants <code>CO_EMCY_REG_...</code> for the error register bits and <code>CO_EMCY_CODE_...</code> for the EMCY code base values are the specified values out of the CANopen specification.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When using pure numbers, check the possible range for the error register bits (8bit) and the EMCY code (16bit).</p>
+</div>
+<h2 id="node-specification">Node Specification<a class="headerlink" href="#node-specification" title="Permanent link">#</a></h2>
+<p>The main settings of the node are configured inside the <code>CO_NODE_SPEC</code> struct. This struct will not be modified at runtime, so it can be declared as a constant, reducing RAM usage. The CANopen node needs some memory buffers for dynamic operations. These two buffers are statically allocated, and a pointer is stored inside the <code>CO_NODE_SPEC</code> struct. Refer to the file <a href="https://github.com/embedded-office/canopen-stack/blob/master/example/quickstart/app/clock_spec.c#L21">clock_spec.c</a> for more detail:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;co_core.h&quot;</span><span class="cp"></span>
+<span class="w">  </span><span class="o">:</span><span class="w"></span>
+<span class="cm">/* Define some default values for our CANopen node: */</span><span class="w"></span>
+<span class="cp">#define APP_NODE_ID       1u                 </span><span class="cm">/* CANopen node ID             */</span><span class="cp"></span>
+<span class="cp">#define APP_BAUDRATE      250000u            </span><span class="cm">/* CAN baudrate                */</span><span class="cp"></span>
+<span class="cp">#define APP_TMR_N         16u                </span><span class="cm">/* Number of software timers   */</span><span class="cp"></span>
+<span class="cp">#define APP_TICKS_PER_SEC 1000u              </span><span class="cm">/* Timer clock frequency in Hz */</span><span class="cp"></span>
+<span class="cp">#define APP_OBJ_N         128u               </span><span class="cm">/* Object dictionary max size  */</span><span class="cp"></span>
+<span class="w">  </span><span class="o">:</span><span class="w"></span>
+<span class="cm">/* Each software timer needs some memory for managing</span>
+<span class="cm"> * the lists and states of the timed action events.</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="n">CO_TMR_MEM</span><span class="w"> </span><span class="n">TmrMem</span><span class="p">[</span><span class="n">APP_TMR_N</span><span class="p">];</span><span class="w"></span>
+
+<span class="cm">/* Each SDO server needs memory for the segmented or</span>
+<span class="cm"> * block transfer requests.</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="kt">uint8_t</span><span class="w"> </span><span class="n">SdoSrvMem</span><span class="p">[</span><span class="n">CO_SSDO_N</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">CO_SDO_BUF_BYTE</span><span class="p">];</span><span class="w"></span>
+<span class="w">  </span><span class="o">:</span><span class="w"></span>
+<span class="cm">/* Collect all node specification settings in a single</span>
+<span class="cm"> * structure for initializing the node easily.</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="n">CO_NODE_SPEC</span><span class="w"> </span><span class="n">AppSpec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">APP_NODE_ID</span><span class="p">,</span><span class="w">                          </span><span class="cm">/* default Node-Id                */</span><span class="w"></span>
+<span class="w">  </span><span class="n">APP_BAUDRATE</span><span class="p">,</span><span class="w">                         </span><span class="cm">/* default Baudrate               */</span><span class="w"></span>
+<span class="w">  </span><span class="p">(</span><span class="n">CO_OBJ</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">ClockOD</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w">                </span><span class="cm">/* pointer to object dictionary   */</span><span class="w"></span>
+<span class="w">  </span><span class="n">APP_OBJ_N</span><span class="p">,</span><span class="w">                            </span><span class="cm">/* object dictionary max length   */</span><span class="w"></span>
+<span class="w">  </span><span class="o">&amp;</span><span class="n">AppEmcyTbl</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w">                       </span><span class="cm">/* EMCY code &amp; register bit table */</span><span class="w"></span>
+<span class="w">  </span><span class="o">&amp;</span><span class="n">TmrMem</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w">                           </span><span class="cm">/* pointer to timer memory blocks */</span><span class="w"></span>
+<span class="w">  </span><span class="n">APP_TMR_N</span><span class="p">,</span><span class="w">                            </span><span class="cm">/* number of timer memory blocks  */</span><span class="w"></span>
+<span class="w">  </span><span class="n">APP_TICKS_PER_SEC</span><span class="p">,</span><span class="w">                    </span><span class="cm">/* timer clock frequency in Hz    */</span><span class="w"></span>
+<span class="w">  </span><span class="p">(</span><span class="n">CO_IF_DRV</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">AppDriver</span><span class="p">,</span><span class="w">              </span><span class="cm">/* select drivers for application */</span><span class="w"></span>
+<span class="w">  </span><span class="o">&amp;</span><span class="n">SdoSrvMem</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w">                         </span><span class="cm">/* SDO Transfer Buffer Memory     */</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+</code></pre></div>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>Never manipulate these variables directly. Doing so will cause problems.</p>
+</div>
+<h2 id="application-start">Application Start<a class="headerlink" href="#application-start" title="Permanent link">#</a></h2>
+<p>The application code is implemented in the file <a href="https://github.com/embedded-office/canopen-stack/blob/master/example/quickstart/app/clock_app.c">clock_app.c</a>. This file is responsible for the CANopen Stack startup as well as the application-specific clock function. Let's start with the CANopen Stack <a href="https://github.com/embedded-office/canopen-stack/blob/master/example/quickstart/app/clock_app.c#L90">startup</a>:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;co_core.h&quot;</span><span class="cp"></span>
+
+<span class="cm">/* get external node specification */</span><span class="w"></span>
+<span class="k">extern</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">CO_NODE_SPEC</span><span class="w"> </span><span class="n">AppSpec</span><span class="p">;</span><span class="w"></span>
+
+<span class="cm">/* Allocate a global CANopen node object */</span><span class="w"></span>
+<span class="n">CO_NODE</span><span class="w"> </span><span class="n">Clk</span><span class="p">;</span><span class="w"></span>
+
+<span class="cm">/* main entry function */</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[])</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">ticks</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="cm">/* Initialize your hardware layer and the CANopen stack.</span>
+<span class="cm">   * Stop execution if an error is detected.</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/* BSPInit(); */</span><span class="w"></span>
+<span class="w">  </span><span class="n">CONodeInit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Clk</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">CO_NODE_SPEC</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">AppSpec</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">CONodeGetErr</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Clk</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">CO_ERR_NONE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="cm">/* Use CANopen software timer to create a cyclic function</span>
+<span class="cm">   * call to the callback function &#39;AppClock()&#39; with a period</span>
+<span class="cm">   * of 1s (equal: 1000ms).</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="w">  </span><span class="n">ticks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">COTmrGetTicks</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Clk</span><span class="p">.</span><span class="n">Tmr</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="n">CO_TMR_UNIT_1MS</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">COTmrCreate</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Clk</span><span class="p">.</span><span class="n">Tmr</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">ticks</span><span class="p">,</span><span class="w"> </span><span class="n">AppClock</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">Clk</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="cm">/* Start the CANopen node and set it automatically to</span>
+<span class="cm">   * NMT mode: &#39;OPERATIONAL&#39;.</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="w">  </span><span class="n">CONodeStart</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Clk</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">CONmtSetMode</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Clk</span><span class="p">.</span><span class="n">Nmt</span><span class="p">,</span><span class="w"> </span><span class="n">CO_OPERATIONAL</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">  </span><span class="cm">/* In the background loop we process received CAN frames</span>
+<span class="cm">   * and executes elapsed action callback functions.</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">CONodeProcess</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Clk</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">COTmrProcess</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Clk</span><span class="p">.</span><span class="n">Tmr</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<h2 id="application-callback">Application Callback<a class="headerlink" href="#application-callback" title="Permanent link">#</a></h2>
+<p>The timer callback function <a href="https://github.com/embedded-office/canopen-stack/blob/master/example/quickstart/app/clock_app.c#L36">AppClock()</a> includes the main functionality of the clock node:</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/* timer callback function */</span><span class="w"></span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">AppClock</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">p_arg</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="n">CO_NODE</span><span class="w">  </span><span class="o">*</span><span class="n">node</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">CO_OBJ</span><span class="w">   </span><span class="o">*</span><span class="n">od_sec</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">CO_OBJ</span><span class="w">   </span><span class="o">*</span><span class="n">od_min</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="n">CO_OBJ</span><span class="w">   </span><span class="o">*</span><span class="n">od_hr</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">uint8_t</span><span class="w">   </span><span class="n">second</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">uint8_t</span><span class="w">   </span><span class="n">minute</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="kt">uint32_t</span><span class="w">  </span><span class="n">hour</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">  </span><span class="cm">/* For flexible usage (not needed, but nice to show), we use the argument</span>
+<span class="cm">   * as reference to the CANopen node object. If no node is given, we ignore</span>
+<span class="cm">   * the function call by returning immediatelly.</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="w">  </span><span class="n">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">CO_NODE</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">p_arg</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">  </span><span class="cm">/* Main functionality: when we are in operational mode, we get the current</span>
+<span class="cm">   * clock values out of the object dictionary, increment the seconds and</span>
+<span class="cm">   * update all clock values in the object dictionary.</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">CONmtGetMode</span><span class="p">(</span><span class="o">&amp;</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">Nmt</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">CO_OPERATIONAL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">od_sec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CODictFind</span><span class="p">(</span><span class="o">&amp;</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">Dict</span><span class="p">,</span><span class="w"> </span><span class="n">CO_DEV</span><span class="p">(</span><span class="mh">0x2100</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="n">od_min</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CODictFind</span><span class="p">(</span><span class="o">&amp;</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">Dict</span><span class="p">,</span><span class="w"> </span><span class="n">CO_DEV</span><span class="p">(</span><span class="mh">0x2100</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="n">od_hr</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">CODictFind</span><span class="p">(</span><span class="o">&amp;</span><span class="n">node</span><span class="o">-&gt;</span><span class="n">Dict</span><span class="p">,</span><span class="w"> </span><span class="n">CO_DEV</span><span class="p">(</span><span class="mh">0x2100</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">COObjRdValue</span><span class="p">(</span><span class="n">od_sec</span><span class="p">,</span><span class="w"> </span><span class="n">node</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">second</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">second</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">COObjRdValue</span><span class="p">(</span><span class="n">od_min</span><span class="p">,</span><span class="w"> </span><span class="n">node</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">minute</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">minute</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">COObjRdValue</span><span class="p">(</span><span class="n">od_hr</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">node</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">hour</span><span class="w">  </span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">hour</span><span class="p">),</span><span class="w">   </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">second</span><span class="o">++</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">second</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">60</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">second</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">minute</span><span class="o">++</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">minute</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">60</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="n">minute</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="n">hour</span><span class="o">++</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">COObjWrValue</span><span class="p">(</span><span class="n">od_hr</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">node</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">hour</span><span class="w">  </span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">hour</span><span class="p">),</span><span class="w">   </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">COObjWrValue</span><span class="p">(</span><span class="n">od_min</span><span class="p">,</span><span class="w"> </span><span class="n">node</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">minute</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">minute</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">COObjWrValue</span><span class="p">(</span><span class="n">od_sec</span><span class="p">,</span><span class="w"> </span><span class="n">node</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">second</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">second</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>The last write access with <code>COObjWrValue()</code> triggers the transmission of the PDO, because the corresponding object entry is defined as type <code>CO_TASYNC</code>.</p>
+</div>
+<h2 id="hardware-connection">Hardware Connection<a class="headerlink" href="#hardware-connection" title="Permanent link">#</a></h2>
+<p>Next, you will need to add drivers to your project to interface the stack with your hardware, as shown in <a href="https://github.com/embedded-office/canopen-stack/blob/master/example/quickstart/app/clock_spec.c#L98">clock_spec.c</a>:</p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="o">:</span><span class="w"></span>
+<span class="w">                                              </span><span class="cm">/* select application drivers: */</span><span class="w"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;co_can_dummy.h&quot;</span><span class="c1">                     /* CAN driver                  */</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;co_timer_dummy.h&quot;</span><span class="c1">                   /* Timer driver                */</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;co_nvm_dummy.h&quot;</span><span class="c1">                     /* NVM driver                  */</span><span class="cp"></span>
+<span class="w">  </span><span class="o">:</span><span class="w"></span>
+<span class="cm">/* Select the drivers for your application. For possible</span>
+<span class="cm"> * selections, see the directory /drivers. In this example</span>
+<span class="cm"> * we select the driver templates. You may fill them with</span>
+<span class="cm"> * your specific hardware functionality.</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="k">const</span><span class="w"> </span><span class="n">CO_IF_DRV</span><span class="w"> </span><span class="n">AppDriver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="o">&amp;</span><span class="n">DummyCanDriver</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="o">&amp;</span><span class="n">DummyTimerDriver</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="o">&amp;</span><span class="n">DummyNvmDriver</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+<span class="w">  </span><span class="o">:</span><span class="w"></span>
+</code></pre></div>
+<p>When you write your device driver, you will need to set up a hardware timer interrupt within your low-level layer - the Board Support Package (BSP) - and configure a periodic interrupt source with a frequency of <code>APP_TICKS_PER_SEC</code>. The timer interrupt service handler should look something like this:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;co_core.h&quot;</span><span class="cp"></span>
+<span class="w">  </span><span class="o">:</span><span class="w"></span>
+<span class="cm">/* get external CANopen node */</span><span class="w"></span>
+<span class="k">extern</span><span class="w"> </span><span class="n">CO_NODE</span><span class="w"> </span><span class="n">Clk</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="o">:</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="n">App_TmrIsrHandler</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/* collect elapsed timed actions */</span><span class="w"></span>
+<span class="w">  </span><span class="n">COTmrService</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Clk</span><span class="p">.</span><span class="n">Tmr</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../structure/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Repository Structure" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Repository Structure
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../usage/architecture/" class="md-footer__link md-footer__link--next" aria-label="Next: Device Architecture" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Device Architecture
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; by <a href="https://www.embedded-office.com/">Embedded Office</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://canopen-stack.org/" target="_blank" rel="noopener" title="canopen-stack.org" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5Z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://github.com/embedded-office/canopen-stack/" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/company/embedded-office/" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77Z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.instant", "header.autohide"], "search": "../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      
+    
+  </body>
+</html>

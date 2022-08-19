@@ -1,0 +1,1854 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="CANopen Stack Documentation">
+      
+      
+        <meta name="author" content="Embedded Office">
+      
+      
+        <link rel="canonical" href="https://canopen-stack.org/v4.3/usage/callbacks/">
+      
+      <link rel="icon" href="../../assets/images/favicon/favicon.ico">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.9">
+    
+    
+      
+        <title>Callback Interface - CANopen Stack</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.1d29e8d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#callback-interface" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-component="outdated" hidden>
+        <aside class="md-banner md-banner--warning">
+          
+        </aside>
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="CANopen Stack" class="md-header__button md-logo" aria-label="CANopen Stack" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 17H7V7h10m4 4V9h-2V7a2 2 0 0 0-2-2h-2V3h-2v2h-2V3H9v2H7c-1.11 0-2 .89-2 2v2H3v2h2v2H3v2h2v2a2 2 0 0 0 2 2h2v2h2v-2h2v2h2v-2h2a2 2 0 0 0 2-2v-2h2v-2h-2v-2m-6 2h-2v-2h2m2-2H9v6h6V9Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            CANopen Stack
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Callback Interface
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/embedded-office/canopen-stack/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    canopen-stack
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../.." class="md-tabs__link">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../start/installation/" class="md-tabs__link">
+        Quickstart
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../architecture/" class="md-tabs__link md-tabs__link--active">
+        CANopen Usage
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../api/node/" class="md-tabs__link">
+        API Functions
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../examples/flash-user-domain/" class="md-tabs__link">
+        Examples
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../hardware/can/" class="md-tabs__link">
+        Hardware Connection
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../../license/" class="md-tabs__link">
+      License
+    </a>
+  </li>
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="CANopen Stack" class="md-nav__button md-logo" aria-label="CANopen Stack" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 17H7V7h10m4 4V9h-2V7a2 2 0 0 0-2-2h-2V3h-2v2h-2V3H9v2H7c-1.11 0-2 .89-2 2v2H3v2h2v2H3v2h2v2a2 2 0 0 0 2 2h2v2h2v-2h2v2h2v-2h2a2 2 0 0 0 2-2v-2h2v-2h-2v-2m-6 2h-2v-2h2m2-2H9v6h6V9Z"/></svg>
+
+    </a>
+    CANopen Stack
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/embedded-office/canopen-stack/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    canopen-stack
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Quickstart
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Quickstart" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Quickstart
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start/installation/" class="md-nav__link">
+        Install Environment
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start/structure/" class="md-nav__link">
+        Repository Structure
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../start/quickstart/" class="md-nav__link">
+        Quickstart Example
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          CANopen Usage
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="CANopen Usage" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          CANopen Usage
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
+        Device Architecture
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overview/" class="md-nav__link">
+        CANopen Stack Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../control/" class="md-nav__link">
+        Controlling the Node
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dictionary/" class="md-nav__link">
+        Using Object Dictionary
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tpdo/" class="md-nav__link">
+        Transmit PDO
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../emergency/" class="md-nav__link">
+        Emergency Errors
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../actions/" class="md-nav__link">
+        Timed Actions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Callback Interface
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Callback Interface
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#application-callback-functions" class="md-nav__link">
+    Application Callback Functions
+  </a>
+  
+    <nav class="md-nav" aria-label="Application Callback Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#conodefatalerror" class="md-nav__link">
+    CONodeFatalError()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cotmrlock" class="md-nav__link">
+    COTmrLock()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coifcanreceive" class="md-nav__link">
+    COIfCanReceive()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#colssstore" class="md-nav__link">
+    COLssStore()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#colssload" class="md-nav__link">
+    COLssLoad()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conmtmodechange" class="md-nav__link">
+    CONmtModeChange()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conmtresetrequest" class="md-nav__link">
+    CONmtResetRequest()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conmthbconsevent" class="md-nav__link">
+    CONmtHbConsEvent()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conmthbconschange" class="md-nav__link">
+    CONmtHbConsChange()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#copdotransmit" class="md-nav__link">
+    COPdoTransmit()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#copdoreceive" class="md-nav__link">
+    COPdoReceive()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#copdosyncupdate" class="md-nav__link">
+    COPdoSyncUpdate()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coparadefault" class="md-nav__link">
+    COParaDefault()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#corpdowritedata" class="md-nav__link">
+    CORpdoWriteData()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cotpdoreaddata" class="md-nav__link">
+    COTpdoReadData()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        Configuration
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          API Functions
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="API Functions" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          API Functions
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/node/" class="md-nav__link">
+        CANopen Node
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/dictionary/" class="md-nav__link">
+        Object Dictionary
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/emergency/" class="md-nav__link">
+        Emergency
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/network/" class="md-nav__link">
+        Network Management
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/object/" class="md-nav__link">
+        Object Entry
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/tpdo/" class="md-nav__link">
+        TPDO Event
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/interface/" class="md-nav__link">
+        CAN Interface
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/timer/" class="md-nav__link">
+        Timer Handling
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/parameter/" class="md-nav__link">
+        Parameter Storage
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/csdo/" class="md-nav__link">
+        SDO Client
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          Examples
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Examples" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Examples
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/flash-user-domain/" class="md-nav__link">
+        Firmware Upload
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/setup-calibration-mode/" class="md-nav__link">
+        Calibration Mode
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/write-serial-number/" class="md-nav__link">
+        Write Serial Number
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/setup-dynamic-object-dictionary/" class="md-nav__link">
+        Dynamic Dictionary I
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/use-dynamic-object-dictionary/" class="md-nav__link">
+        Dynamic Dictionary II
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/usage-with-rtos-and-baremetal/" class="md-nav__link">
+        RTOS and Baremetal
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          Hardware Connection
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Hardware Connection" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Hardware Connection
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardware/can/" class="md-nav__link">
+        CAN Driver
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardware/timer/" class="md-nav__link">
+        Timer Driver
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hardware/nvm/" class="md-nav__link">
+        NVM Driver
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../license/" class="md-nav__link">
+        License
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#application-callback-functions" class="md-nav__link">
+    Application Callback Functions
+  </a>
+  
+    <nav class="md-nav" aria-label="Application Callback Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#conodefatalerror" class="md-nav__link">
+    CONodeFatalError()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cotmrlock" class="md-nav__link">
+    COTmrLock()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coifcanreceive" class="md-nav__link">
+    COIfCanReceive()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#colssstore" class="md-nav__link">
+    COLssStore()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#colssload" class="md-nav__link">
+    COLssLoad()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conmtmodechange" class="md-nav__link">
+    CONmtModeChange()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conmtresetrequest" class="md-nav__link">
+    CONmtResetRequest()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conmthbconsevent" class="md-nav__link">
+    CONmtHbConsEvent()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conmthbconschange" class="md-nav__link">
+    CONmtHbConsChange()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#copdotransmit" class="md-nav__link">
+    COPdoTransmit()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#copdoreceive" class="md-nav__link">
+    COPdoReceive()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#copdosyncupdate" class="md-nav__link">
+    COPdoSyncUpdate()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coparadefault" class="md-nav__link">
+    COParaDefault()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#corpdowritedata" class="md-nav__link">
+    CORpdoWriteData()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cotpdoreaddata" class="md-nav__link">
+    COTpdoReadData()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+  <a href="https://github.com/embedded-office/canopen-stack/edit/master/docs/usage/callbacks.md" title="Edit this page" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+
+<h1 id="callback-interface">Callback Interface<a class="headerlink" href="#callback-interface" title="Permanent link">#</a></h1>
+<h2 id="application-callback-functions">Application Callback Functions<a class="headerlink" href="#application-callback-functions" title="Permanent link">#</a></h2>
+<p>This chapter gives an overview of the component Callback Interface. The listed functions are available for programming the application-specific reactions on several events of the CANopen device.</p>
+<h3 id="conodefatalerror">CONodeFatalError()<a class="headerlink" href="#conodefatalerror" title="Permanent link">#</a></h3>
+<p>This <strong>mandatory</strong> function is called, after detecting a fatal error within the stack, and no way out of the situation (<em>panic</em>). The function is intended to allow the implementation of a pre-defined shutdown sequence and setting the device in a safe state.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">CONodeFatalError</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/* Place here your fatal error handling.</span>
+<span class="cm">   * There is most likely a programming error.</span>
+<span class="cm">   * !! Please don&#39;t ignore this errors. !!</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(;;);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<h3 id="cotmrlock">COTmrLock()<a class="headerlink" href="#cotmrlock" title="Permanent link">#</a></h3>
+<p>These <strong>mandatory</strong> function pair is called during timer management and is the right place to add a locking mechanism for the timer management structure. The simplest implementation is disabling and re-enabling the timer hardware interrupt. In more advanced scenarios there could be a timer mutex or spin-lock, depending on the RTOS and number of active cores.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">COTmrLock</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/* This function helps to guarantee the consistancy</span>
+<span class="cm">   * of the internal timer management while interrupted</span>
+<span class="cm">   * by the used timer interrupt. Most likely you need</span>
+<span class="cm">   * at this point on of the following mechanisms:</span>
+<span class="cm">   * - disable the used hardware timer interrupt</span>
+<span class="cm">   * - get a &#39;timer-mutex&#39; from your RTOS (ensure to</span>
+<span class="cm">   *   call COTmrService() in a timer triggered task)</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">COTmrUnlock</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/* This function helps to guarantee the consistancy</span>
+<span class="cm">   * of the internal timer management while interrupted</span>
+<span class="cm">   * by the used timer interrupt. Most likely you need</span>
+<span class="cm">   * at this point on of the following mechanisms:</span>
+<span class="cm">   * - (re)enable the used hardware timer interrupt</span>
+<span class="cm">   * - release the &#39;timer-mutex&#39; from your RTOS (ensure</span>
+<span class="cm">   *   to call COTmrService() in a timer triggered task)</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<h3 id="coifcanreceive">COIfCanReceive()<a class="headerlink" href="#coifcanreceive" title="Permanent link">#</a></h3>
+<p>This <strong>optional</strong> function is called for each CAN frame, which is not consumed (processed) by the CANopen stack. The CAN frame pointer is checked to be valid before the CANopen stack calls this function.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">COIfCanReceive</span><span class="p">(</span><span class="n">CO_IF_FRM</span><span class="w"> </span><span class="o">*</span><span class="n">frm</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/* Optional: place here some code, which is called</span>
+<span class="cm">   * when you need to handle CAN messages, which are</span>
+<span class="cm">   * not part of the CANopen protocol.</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p><strong>Arguments</strong></p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>frm</td>
+<td>The received CAN frame</td>
+</tr>
+</tbody>
+</table>
+<h3 id="colssstore">COLssStore()<a class="headerlink" href="#colssstore" title="Permanent link">#</a></h3>
+<p>This <strong>optional</strong> function is called with new configuration data, which is set by the LSS service. If the configuration data should stay unchanged, the argument is 0. The CAN frame pointer is checked to be valid before the CANopen stack calls this function.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int16_t</span><span class="w"> </span><span class="nf">COLssStore</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">baudrate</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">nodeId</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/* Optional: place here some code, which is called</span>
+<span class="cm">   * when LSS client is in use and the CANopen node</span>
+<span class="cm">   * needs to store updated values.</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="mi">0u</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p><strong>Arguments</strong></p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>baudrate</td>
+<td>The configured baudrate for storage</td>
+</tr>
+<tr>
+<td>nodeId</td>
+<td>The configured node id for storage</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returned Value</strong></p>
+<ul>
+<li><code>==0</code> : configuration stored</li>
+<li><code>!=0</code> : error is detected</li>
+</ul>
+<h3 id="colssload">COLssLoad()<a class="headerlink" href="#colssload" title="Permanent link">#</a></h3>
+<p>This <strong>optional</strong> function is called during reset communication to load the stored LSS configuration. If no storage for the configuration data is found, the referenced argument should stay unchanged. The CAN frame pointer is checked to be valid before the CANopen stack calls this function.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int16_t</span><span class="w"> </span><span class="nf">COLssLoad</span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="o">*</span><span class="n">baudrate</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="n">nodeId</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/* Optional: place here some code, which is called</span>
+<span class="cm">   * when LSS client is in use and the CANopen node</span>
+<span class="cm">   * is initialized.</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="mi">0u</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p><strong>Arguments</strong></p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>baudrate</td>
+<td>Reference to the baudrate, which should be set to storage value</td>
+</tr>
+<tr>
+<td>nodeId</td>
+<td>Reference to the node-id, which should be set to storage value</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returned Value</strong></p>
+<ul>
+<li><code>==0</code> : configuration loaded</li>
+<li><code>!=0</code> : error is detected</li>
+</ul>
+<h3 id="conmtmodechange">CONmtModeChange()<a class="headerlink" href="#conmtmodechange" title="Permanent link">#</a></h3>
+<p>This <strong>optional</strong> function is called when the NMT mode is changed. The nmt object pointer is checked to be valid before the CANopen stack calls this function.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">CONmtModeChange</span><span class="p">(</span><span class="n">CO_NMT</span><span class="w"> </span><span class="o">*</span><span class="n">nmt</span><span class="p">,</span><span class="w"> </span><span class="n">CO_MODE</span><span class="w"> </span><span class="n">mode</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/* Optional: place here some code, which is called</span>
+<span class="cm">   * when a NMT mode change is initiated.</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p><strong>Arguments</strong></p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nmt</td>
+<td>reference to NMT structure</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>the new mode</td>
+</tr>
+</tbody>
+</table>
+<h3 id="conmtresetrequest">CONmtResetRequest()<a class="headerlink" href="#conmtresetrequest" title="Permanent link">#</a></h3>
+<p>This <strong>optional</strong> function is called when the NMT reset is requested via CAN network. The nmt object pointer is checked to be valid before the CANopen stack calls this function.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">CONmtResetRequest</span><span class="p">(</span><span class="n">CO_NMT</span><span class="w"> </span><span class="o">*</span><span class="n">nmt</span><span class="p">,</span><span class="w"> </span><span class="n">CO_NMT_RESET</span><span class="w"> </span><span class="n">reset</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/* Optional: place here some code, which is called</span>
+<span class="cm">   * when a NMT reset is requested by the network.</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p><strong>Arguments</strong></p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nmt</td>
+<td>reference to NMT structure</td>
+</tr>
+<tr>
+<td>reset</td>
+<td>the requested reset type</td>
+</tr>
+</tbody>
+</table>
+<h3 id="conmthbconsevent">CONmtHbConsEvent()<a class="headerlink" href="#conmthbconsevent" title="Permanent link">#</a></h3>
+<p>This <strong>optional</strong> function is called when a heartbeat consumer monitor timer elapses, before receiving the corresponding heartbeat message. The node pointer is checked to be valid before the CANopen stack calls this function.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">CONmtHbConsEvent</span><span class="p">(</span><span class="n">CO_NMT</span><span class="w"> </span><span class="o">*</span><span class="n">nmt</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">nodeId</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/* Optional: place here some code, which is called</span>
+<span class="cm">   * called when heartbeat consumer is in use and</span>
+<span class="cm">   * detects an error on monitored node(s).</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p><strong>Arguments</strong></p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nmt</td>
+<td>reference to NMT structure</td>
+</tr>
+<tr>
+<td>nodeId</td>
+<td>The nodeId of the missed heartbeat message</td>
+</tr>
+</tbody>
+</table>
+<h3 id="conmthbconschange">CONmtHbConsChange()<a class="headerlink" href="#conmthbconschange" title="Permanent link">#</a></h3>
+<p>This <strong>optional</strong> function is called when a heartbeat consumer monitor detects a state change, of a monitored node. The node pointer is checked to be valid before the CANopen stack calls this function.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">CONmtHbConsChange</span><span class="p">(</span><span class="n">CO_NMT</span><span class="w"> </span><span class="o">*</span><span class="n">nmt</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">nodeId</span><span class="p">,</span><span class="w"> </span><span class="n">CO_MODE</span><span class="w"> </span><span class="n">mode</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/* Optional: place here some code, which is called</span>
+<span class="cm">   * when heartbeat consumer is in use and detects a</span>
+<span class="cm">   * NMT state change on monitored node(s).</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p><strong>Arguments</strong></p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nmt</td>
+<td>reference to NMT structure</td>
+</tr>
+<tr>
+<td>nodeId</td>
+<td>The nodeId of the monitored node</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>The new received node state of the monitored node</td>
+</tr>
+</tbody>
+</table>
+<h3 id="copdotransmit">COPdoTransmit()<a class="headerlink" href="#copdotransmit" title="Permanent link">#</a></h3>
+<p>This <strong>optional</strong> function is called just before the PDO transmission will send the PDO message frame to the CANopen network.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">COPdoTransmit</span><span class="p">(</span><span class="n">CO_IF_FRM</span><span class="w"> </span><span class="o">*</span><span class="n">frm</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/* Optional: place here some code, which is called</span>
+<span class="cm">   * just before a PDO is transmitted. You may adjust</span>
+<span class="cm">   * the given CAN frame which is send afterwards.</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p><strong>Arguments</strong></p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>frm</td>
+<td>Pointer to PDO message frame</td>
+</tr>
+</tbody>
+</table>
+<h3 id="copdoreceive">COPdoReceive()<a class="headerlink" href="#copdoreceive" title="Permanent link">#</a></h3>
+<p>This <strong>optional</strong> function is called just before the PDO reception will distribute the PDO message frame into the object dictionary. This callback function is able to <em>consume</em> the PDO message frame, e.g. the distribution into the object dictionary will be skipped. Furthermore without <em>consuming</em> the PDO message frame, this function could modify the received data before distribution takes place.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int16_t</span><span class="w"> </span><span class="nf">COPdoReceive</span><span class="p">(</span><span class="n">CO_IF_FRM</span><span class="w"> </span><span class="o">*</span><span class="n">frm</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/* Optional: place here some code, which is called</span>
+<span class="cm">   * right after receiving a PDO. You may adjust</span>
+<span class="cm">   * the given CAN frame which is written into the</span>
+<span class="cm">   * object dictionary afterwards or suppress the</span>
+<span class="cm">   * write operation.</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="p">(</span><span class="mi">0u</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p><strong>Arguments</strong></p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>frm</td>
+<td>Pointer to received PDO message frame</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returned Value</strong></p>
+<ul>
+<li><code>=0</code> : CAN message frame is not consumed</li>
+<li><code>&gt;0</code> : CAN message frame is consumed</li>
+</ul>
+<h3 id="copdosyncupdate">COPdoSyncUpdate()<a class="headerlink" href="#copdosyncupdate" title="Permanent link">#</a></h3>
+<p>This <strong>optional</strong> function is called after a synchronized PDO is received and the data is distributed into the object dictionary.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">COPdoSyncUpdate</span><span class="p">(</span><span class="n">CO_RPDO</span><span class="w"> </span><span class="o">*</span><span class="n">pdo</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/* Optional: place here some code, which is called</span>
+<span class="cm">   * right after the object dictionary update due to</span>
+<span class="cm">   * a synchronized PDO.</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p><strong>Arguments</strong></p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pdo</td>
+<td>Pointer to received and synchronous processed RPDO</td>
+</tr>
+</tbody>
+</table>
+<h3 id="coparadefault">COParaDefault()<a class="headerlink" href="#coparadefault" title="Permanent link">#</a></h3>
+<p>This <strong>optional</strong> function will be called during restoring the default values of a parameter group. The function is responsible for setting the factory defaults in the current parameter group memory. The parameter group info pointer is checked to be valid before the CANopen stack calls this function.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">int16_t</span><span class="w"> </span><span class="nf">COParaDefault</span><span class="p">(</span><span class="n">CO_PARA</span><span class="w"> </span><span class="o">*</span><span class="n">pg</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/* Optional: place here some code, which is called</span>
+<span class="cm">   * when a parameter group is restored to factory</span>
+<span class="cm">   * settings.</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p><strong>Arguments</strong></p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pg</td>
+<td>Ptr to parameter group info</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returned Value</strong></p>
+<ul>
+<li><code>=0</code> : parameter default values successful set</li>
+<li><code>&lt;0</code> : error is detected and function aborted</li>
+</ul>
+<h3 id="corpdowritedata">CORpdoWriteData()<a class="headerlink" href="#corpdowritedata" title="Permanent link">#</a></h3>
+<p>This <strong>optional</strong> function is called during PDO distribution of the PDO message frame into the object dictionary when mapped data value consumes more than 4 bytes.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">CORpdoWriteData</span><span class="p">(</span><span class="n">CO_IF_FRM</span><span class="w"> </span><span class="o">*</span><span class="n">frm</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">pos</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">CO_OBJ</span><span class="w"> </span><span class="o">*</span><span class="n">obj</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/* Optional: place here some code, which is called</span>
+<span class="cm">   * when a PDO is received with mapped values with</span>
+<span class="cm">   * a size larger than 4 byte.</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p><strong>Arguments</strong></p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>frm</td>
+<td>Ptr to PDO message frame</td>
+</tr>
+<tr>
+<td>pos</td>
+<td>The start index in the CAN message frame payload</td>
+</tr>
+<tr>
+<td>size</td>
+<td>The mapped value size in bytes</td>
+</tr>
+<tr>
+<td>obj</td>
+<td>Ptr to the target object entry</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cotpdoreaddata">COTpdoReadData()<a class="headerlink" href="#cotpdoreaddata" title="Permanent link">#</a></h3>
+<p>This <strong>optional</strong> function is called during PDO transmission when a mapped data value consumes more than 4 bytes.</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">COTpdoReadData</span><span class="p">(</span><span class="n">CO_IF_FRM</span><span class="w"> </span><span class="o">*</span><span class="n">frm</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">pos</span><span class="p">,</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">CO_OBJ</span><span class="w"> </span><span class="o">*</span><span class="n">obj</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="cm">/* Optional: place here some code, which is called</span>
+<span class="cm">   * when a PDO is constructed for transmission which</span>
+<span class="cm">   * needs a mapped values with a size larger than 4 byte.</span>
+<span class="cm">   */</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p><strong>Arguments</strong></p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>frm</td>
+<td>Ptr to PDO message frame</td>
+</tr>
+<tr>
+<td>pos</td>
+<td>The start index in the CAN message frame payload</td>
+</tr>
+<tr>
+<td>size</td>
+<td>The mapped value size in bytes</td>
+</tr>
+<tr>
+<td>obj</td>
+<td>Ptr to the source object entry</td>
+</tr>
+</tbody>
+</table>
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../actions/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Timed Actions" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Timed Actions
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../configuration/" class="md-footer__link md-footer__link--next" aria-label="Next: Configuration" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Configuration
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; by <a href="https://www.embedded-office.com/">Embedded Office</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://canopen-stack.org/" target="_blank" rel="noopener" title="canopen-stack.org" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5Z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://github.com/embedded-office/canopen-stack/" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/company/embedded-office/" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77Z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.instant", "header.autohide"], "search": "../../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.6c7ad80a.min.js"></script>
+      
+    
+  </body>
+</html>
