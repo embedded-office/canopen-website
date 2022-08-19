@@ -8,9 +8,9 @@ on:
       - 'v*.*.*'
 
 env:
-  REQUIREMENTS: website/requirements.txt
-  MKDOCS: website/mkdocs.yml
-  WEBSITE: website/site
+  REQUIREMENTS: requirements.txt
+  MKDOCS: mkdocs.yml
+  WEBSITE: site
 
 jobs:
   deploy:

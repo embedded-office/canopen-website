@@ -2,20 +2,17 @@ name: Update Website
 
 on:
   push:
-    # any push without setting a version tag will update the website
-    # when a file within the website directory is updated:
+    # any push without setting a version tag to main will update the website
     tags-ignore:
       - 'v*.*.*'
     branches:
       - master
       - main
-    paths:
-      - 'website/**'
 
 env:
-  REQUIREMENTS: website/requirements.txt
-  MKDOCS: website/mkdocs.yml
-  WEBSITE: website/site
+  REQUIREMENTS: requirements.txt
+  MKDOCS: mkdocs.yml
+  WEBSITE: site
 
 jobs:
   deploy:
