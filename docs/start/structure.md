@@ -6,26 +6,23 @@ The following description explains the directories within this repository.
 
 ```
   root
-  +- canopen        : --- CANopen Stack source code ---
+  +- src            : --- CANopen Stack source code ---
   |  +- config      : configuration files
-  |  +- include     : include files
-  |  +- source      : C source files
-  +- driver         : --- driver templates ---
-  |  +- include     : include files
-  |  +- source      : C source files
-  +- example        : --- example projects ---
-  |  +- quickstart  : quickstart files
-  +- testsuite      : --- testsuite ---
-  |  +- app         : test application
-  |  +- testfrm     : test framework
-  |  +- tests       : tests for CANopen Stack
+  |  +- core        : core services
+  |  +- hal         : hardware abstraction interface
+  |  +- object      : object type functions
+  |  |  +- basic    : basic types
+  |  |  +- cia301   : CiA301 types
+  |  +- service     : protocol service files
+  |  |  +- cia301   : standard protocols
+  |  |  +- cia305   : layer setting service
 ```
 
-When using the CANopen Stack, you need the `canopen` directory tree only. All other directories are for managing the development and testing of the CANopen Stack.
+When using the CANopen Stack, you need the `src` directory tree only.
 
-### Directory: canopen
+### Directory: config
 
-This directory tree contains the embedded source code of the CANopen Stack. The intended purpose is to create a library with your cross-compiler with all source files in the directory `source` and a specific configuration, defined in the file `co_cfg.h`:
+This directory contains the configuration of the CANopen Stack. The intended purpose is to create a library with your cross-compiler with all source files in the directory `src` and a specific configuration, defined in the file `co_cfg.h`:
 
 ```
 mandatory settings
@@ -42,16 +39,22 @@ settings for optimizing resource usage
 - USE_CSDO      : enable/disable support for SDO clients (default: 1)
 ```
 
-### Directory: driver
+### Directory: core
 
-This directory tree contains the template files for your driver development (the `dummy` devices). For the testsuite, there are `sim` drivers included which simulates the hardware behavior for testing purpose.
+This directory holds the general CANopen functions, which are implemented according the specification Cia301.
 
-### Directory: example
+### Directory: hal
 
-This directory tree contains example projects which you can take for inspiration and learning the stack. You may copy and adjust these projects to your needs.
+This directory holds a common interface definition used within the CANopen stack to access different chip vendor hardware abstraction layers via `drivers`. The drivers are not included in this directory, they are part of the target specific project. (see an example in [canopen-stm32f7xx][1]).
 
-### Directory: testsuite
+### Directory: object
 
-This directory tree contains a test application running on the host and checking the behavior of the CANOpen Stack with a simulated CAN interface.
+This directory includes the implementation of object type functions. The subdirectory `basic` includes the basic data types, which handles values in object dictionary entries.
 
-The README within the repository root explains how to setup a local development environment, which is able to run all tests after enhancements.
+Other subdirectories (e.g. `cia301`) includes object types, which performs some kind of functionality during reading or writing from/to the object entry. The name of the subdirectory describes the source of specification for this object type.
+
+### Directory: service
+
+This directory holds the implementation of CAN protocols. The subdirectory `cia301` and `cia305` describes the source of specification for the included protocols.
+
+[1]: https://github.com/embedded-office/canopen-stm32f7xx
