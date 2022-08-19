@@ -5,6 +5,7 @@ site_name: CANopen Stack
 repo_name: "canopen-stack"
 repo_url: https://github.com/embedded-office/canopen-stack/
 site_url: https://canopen-stack.org/
+edit_uri: ""
 site_description: CANopen Stack Documentation
 site_author: Embedded Office
 copyright: Copyright &copy; by <a href="https://www.embedded-office.com/">Embedded Office</a>
