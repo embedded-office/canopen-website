@@ -21,7 +21,7 @@ jobs:
 
       - name: Summary
         run: |
-          echo "version: ${{ env.VERSION_TAG }}"
+          echo "version: v${{ env.VERSION_TAG }}"
 
       - name: Setup Python
         uses: actions/setup-python@v2
@@ -42,5 +42,5 @@ jobs:
 
       - name: Deploy Website
         run: |
-          mike deploy --push --update-aliases ${{ env.VERSION_TAG }} latest
+          mike deploy --push --update-aliases v${{ env.VERSION_TAG }} latest
           mike set-default --push latest
