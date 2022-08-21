@@ -34,13 +34,13 @@ The directory `src/app/...` contains three modules:
 
 The main settings of the node are configured inside the `CO_NODE_SPEC` struct. This struct is not used or modified after initialization is finished. This allows you to declared this structure as a constant.
 
-Due to the fact, that the central element of a CANopen node is the object dictionary, we start with the description of the specification of our object dictionary.
+Due to the fact, that the central element of a CANopen node is the object dictionary, we start with the description of the specification of our object dictionary. You find the specification in the file [src/app/clock_spec.c][2].
 
 ### Object Dictionary
 
 **Description**
 
-To keep the software as simple as possible, we will use a static object dictionary. In this case, the object dictionary is an array of object entries, declared as a constant array of object entries of type `CO_OBJ`. The object dictionary is declared in the file [clock_spec.c][2]:
+To keep the software as simple as possible, we will use a static object dictionary. In this case, the object dictionary is an array of object entries, declared as a constant array of object entries of type `CO_OBJ`. 
 
 **Implementation**
 
@@ -380,7 +380,7 @@ CO_NODE_SPEC AppSpec = {
 
 **Description**
 
-For connecting the CANopen stack to your microcontroller hardware, you need drivers for CAN controller, a hardware timer and a non-volatile memory. 
+For connecting the CANopen stack to your microcontroller hardware, you need drivers for CAN controller, a hardware timer and a non-volatile memory. You find the connection setup in the file [src/app/clock_hw.c][4].
 
 **Implementation**
 
@@ -431,6 +431,8 @@ The CANopen application is realized in functions, reflecting two phases of the a
 
 - **Application Startup** - where initialization of hardware and CANopen layer takes place. The function holds the background loop for processing timer events.
 - **Application Callback** - the cyclic started function holding the running application.
+
+The application for this tiny example is implemented in a single file: [src/app/clock_app.c][5].
 
 ### Application Start
 
@@ -521,12 +523,7 @@ static void AppClock(void *p_arg)
 
 
 [1]: https://github.com/embedded-office/canopen-stm32f7xx
-[2]: https://github.com/embedded-office/canopen-stack/blob/master/example/quickstart/app/clock_spec.c#L50
+[2]: https://github.com/embedded-office/canopen-stm32f7xx/blob/main/src/app/clock_spec.c
 [3]: ../usage/configuration#pdo-mapping-value
-[4]: https://github.com/embedded-office/canopen-stack/blob/master/example/quickstart/app/clock_spec.c#L21
-[5]: https://github.com/embedded-office/canopen-stack/blob/master/example/quickstart/app/clock_app.c
-[6]: https://github.com/embedded-office/canopen-stack/blob/master/example/quickstart/app/clock_app.c#L90
-[7]: https://github.com/embedded-office/canopen-stack/blob/master/example/quickstart/app/clock_app.c#L36
-[8]: https://github.com/embedded-office/canopen-stack/blob/master/example/quickstart/app/clock_spec.c#L98
-[9]: https://github.com/embedded-office/canopen-stack/blob/master/example/quickstart/app/clock_spec.h#L34
-[10]: https://github.com/embedded-office/canopen-stack/blob/master/example/quickstart/app/clock_spec.c#L110
+[4]: https://github.com/embedded-office/canopen-stm32f7xx/blob/main/src/app/clock_hw.c
+[5]: https://github.com/embedded-office/canopen-stm32f7xx/blob/main/src/app/clock_app.c
