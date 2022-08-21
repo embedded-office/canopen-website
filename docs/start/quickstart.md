@@ -318,7 +318,7 @@ static CO_EMCY_TBL AppEmcyTbl[APP_ERR_ID_NUM] = {
     }
     ```
 
-    *Reading the stored value during startup is left as training for you.*
+    *Reading the stored value during startup, or data protection with 2 toggling storage locations is left as training for you.*
 
 ### CANopen Timers
 
