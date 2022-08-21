@@ -299,11 +299,26 @@ static CO_EMCY_TBL AppEmcyTbl[APP_ERR_ID_NUM] = {
 };
 ```
 
-With these enumerations in place, we can call the EMCY service functions in our application, e.g. like:
+!!! info "Possible extension"
 
-```c
-COEmcySet(&node->Emcy, APP_ERR_ID_EEPROM, 0 /*no user data*/);
-```
+    With these enumerations in place, we can call the EMCY service functions in our application. For example we can add the following line at the end of the clock application to store the operational time in `hh:mm`:
+
+    ```c
+      :
+    /* store operational time (hour and minute) in NVM */
+    if (second == 0) {
+        uint32_t num;
+        num  = COIfNvmWrite(&Clk.If, 0, &hour,   4);
+        num += COIfNvmWrite(&Clk.If, 0, &minute, 1);
+        if (num != 5) {
+            COEmcySet(&Clk.Emcy, APP_ERR_ID_EEPROM, 0); /*no user data*/
+        } else {
+            COEmcyClr(&Clk.Emcy, APP_ERR_ID_EEPROM);
+        }
+    }
+    ```
+
+    *Reading the stored value during startup is left as training for you.*
 
 ### CANopen Timers
 
