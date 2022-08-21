@@ -11,7 +11,7 @@ With version 4.4 the CANopen Stack project introduces an ecosystem, which suppor
   ![The CANopen Stack ecosystem](../assets/images/illustrations/canopen-ecosystem.svg "The CANopen Stack ecosystem"){ width=700px }
 </figure>
 
-## Add the CANopen Stack as external component (recommended)
+## Add Component in CMake (recommended)
 
 The build system is realized with [CMake][7] and the [CPM.cmake][6] package management. See [cmake-scripts][3] for details. Including the CANopen Stack into the project is done during the configuration phase of the build environment. During this phase, the CANopen Stack is fetched in the defined version and is available for usage.
 
