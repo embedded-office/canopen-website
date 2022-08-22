@@ -1,3 +1,8 @@
+---
+title: RTOS and Baremetal Usage
+description: This CANopen Stack is usable with and without a RTOS. This examples eplains the different options and their setup.
+---
+
 # RTOS and Baremetal
 
 This example describes the usage and differences when using the CANopen Stack with an RTOS or within a foreground / background system. The overall architecture of a CANopen device is standardized and shown in the following figure:

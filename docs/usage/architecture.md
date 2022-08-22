@@ -1,3 +1,8 @@
+---
+title: CANopen Standardized Architecture
+description: The CANopen Stack library implementes the standardized architecture, specified in CiA301.
+---
+
 # Device Architecture
 
 ## Standard Architecture

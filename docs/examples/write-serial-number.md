@@ -1,3 +1,8 @@
+---
+title: Writing Serial Number Example
+description: This example describes how the CANopen Stack can support the storage of the serial number in a CANopen device.
+---
+
 # Write serial number
 
 In the production line, the devices should be programmed with the identical firmware image. The object entry 1018 holds optionally a serial number which sould be unique for each device. We need a one-time programmable object entry.

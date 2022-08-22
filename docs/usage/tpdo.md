@@ -1,3 +1,8 @@
+---
+title: Triggering a PDO Transmission
+description: The CANopen Stack library provides powerful and flexible triggers to initiate a PDO transmission on events.
+---
+
 # Transmit PDO
 
 ## Triggering PDO Transmission

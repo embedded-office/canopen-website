@@ -1,3 +1,8 @@
+---
+title: CANopen Node API Reference
+description: This free CANopen Stack support an unlimited number of CANopen node instances on a single microcontroller.
+---
+
 # CANopen Node
 
 The node component is the central component and includes all other components for a single CANopen node. The node component provides the interface to the node lifecycle operations.

@@ -1,3 +1,8 @@
+---
+title: Dynamic Object Dictionary Usage
+description: This example describes how we can use the dynamic object dictionary in a CANopen device.
+---
+
 # Dynamic Object Dictionary - Part II
 
 In the [first part][1] of this example, we discover the needed activities to create and manage a dynamic CANopen Object Dictionary. With this example, we will have a look at using the dynamic CANopen Dictionary functions. We will see, how powerful these little functions are and how we can use them to get a dynamic Quickstart application. For details of the object entries, please have a look to the example [Quickstart][2].

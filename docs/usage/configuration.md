@@ -1,3 +1,8 @@
+---
+title: Flexible Configuration Options
+description: There are many ways to adjust the CANopen Stack library to the needs of your CANopen device.
+---
+
 # Configuration
 
 ## Configuration Options

@@ -1,3 +1,8 @@
+---
+title: Communication Categories Overview
+description: The CANopen Stack library is the connection between CAN network and application and handles all different kind of requests.
+---
+
 # CANopen Stack Overview
 
 ## CANopen stack actions

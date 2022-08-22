@@ -1,3 +1,8 @@
+---
+title: PDO Trigger API Reference
+description: This free CANopen Stack supports an unlimited number of transmit PDOs in your CANopen device.
+---
+
 # TPDO Event
 
 The TPDO component provides an interface to the CANopen PDO transmission triggers.

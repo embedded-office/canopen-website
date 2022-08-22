@@ -1,3 +1,8 @@
+---
+title: Timer Device Driver Interface
+description: The CANopen Stack library expects a set of functions for controlling a hardware timer or just use an existing time tick.
+---
+
 # Timer Driver
 
 ## Timer Modes

@@ -1,3 +1,8 @@
+---
+title: CAN Interface API Reference
+description: This free CANopen Stack support an abstracted interface to the CAN hardware of your CANopen device.
+---
+
 # CAN Interface
 
 The interface component provides an interface to the hardware driver.

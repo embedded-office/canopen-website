@@ -1,3 +1,8 @@
+---
+title: NVM Device Driver Interface
+description: The CANopen Stack library expects a set of functions for storing data in non-volatile memory.
+---
+
 # NVM Driver
 
 ## NVM Driver Functions

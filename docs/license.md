@@ -1,3 +1,8 @@
+---
+title: Apache License V2.0
+description: The CANopen Stack library is available for free for private and commercial projects.
+---
+
 ```
                                  Apache License
                            Version 2.0, January 2004

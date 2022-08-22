@@ -1,3 +1,8 @@
+---
+title: CANopen Callback Interface
+description: The CANopen Stack library will call application specific callback functions on several events in the CANopen device.
+---
+
 # Callback Interface
 
 ## Application Callback Functions

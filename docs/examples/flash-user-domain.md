@@ -1,3 +1,7 @@
+---
+title: Firmware Upload Example Descriptions
+description: This example describes some highlights when uploading and storing data in a FLASH domain.
+---
 
 # Firmware Upload
 

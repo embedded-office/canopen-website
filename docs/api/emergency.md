@@ -1,3 +1,8 @@
+---
+title: EMCY Component API Reference
+description: This free CANopen Stack support an unlimited number of EMCY error codes in your CANopen device.
+---
+
 # Emergency
 
 The emergency component provides an interface to the emergency history in the object dictionary and handles the emergency message transmission to the CANopen network.

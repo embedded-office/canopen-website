@@ -1,3 +1,8 @@
+---
+title: Handling Emergency Errors
+description: The CANopen Stack library simplifies the EMCY handling while keeping all possible configuration options.
+---
+
 # Emergency Errors
 
 ## Managing Emergency Errors
@@ -41,9 +46,9 @@ The application can focus on the detection of system situations, which shall ris
 
 ```c
 if (DemoEmcyCondition == TRUE) {
-  COEmcySet  (&demo.Emcy, 0, &DemoEmcyUsr);
+  COEmcySet(&demo.Emcy, 0, &DemoEmcyUsr);
 } else {
-  COEmcyClear(&demo.Emcy, 0);
+  COEmcyClr(&demo.Emcy, 0);
 }
 ```
 
