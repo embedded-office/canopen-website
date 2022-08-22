@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="CANopen Stack Documentation">
+        <meta name="description" content="The CANopen Stack library simplifies the EMCY handling while keeping all possible configuration options.">
       
       
         <meta name="author" content="Embedded Office">
@@ -19,7 +19,7 @@
     
     
       
-        <title>Emergency Errors - CANopen Stack</title>
+        <title>Handling Emergency Errors - CANopen Stack</title>
       
     
     
@@ -109,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Emergency Errors
+              Handling Emergency Errors
             
           </span>
         </div>
@@ -1155,9 +1155,9 @@
 <h3 id="emergency-event">Emergency Event<a class="headerlink" href="#emergency-event" title="Permanent link">#</a></h3>
 <p>The application can focus on the detection of system situations, which shall rise an emergency event. For setting and clearing an emergency #0 on an application-specific emergency condition, the typical sequence is:</p>
 <div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">DemoEmcyCondition</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">TRUE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">COEmcySet</span><span class="w">  </span><span class="p">(</span><span class="o">&amp;</span><span class="n">demo</span><span class="p">.</span><span class="n">Emcy</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">DemoEmcyUsr</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">COEmcySet</span><span class="p">(</span><span class="o">&amp;</span><span class="n">demo</span><span class="p">.</span><span class="n">Emcy</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">DemoEmcyUsr</span><span class="p">);</span><span class="w"></span>
 <span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="n">COEmcyClear</span><span class="p">(</span><span class="o">&amp;</span><span class="n">demo</span><span class="p">.</span><span class="n">Emcy</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="n">COEmcyClr</span><span class="p">(</span><span class="o">&amp;</span><span class="n">demo</span><span class="p">.</span><span class="n">Emcy</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </code></pre></div>
 <p>The setting and clearing functions are very similar. Therefore the following diagram shows the internal behavior of the service for setting an emergency error:</p>

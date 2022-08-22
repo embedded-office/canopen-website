@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="CANopen Stack Documentation">
+        <meta name="description" content="The CANopen Stack library is prepared for easy integration into projects based on the CMake build system.">
       
       
         <meta name="author" content="Embedded Office">
@@ -19,7 +19,7 @@
     
     
       
-        <title>Repository Structure - CANopen Stack</title>
+        <title>Repository Structure of the CANopen Stack library - CANopen Stack</title>
       
     
     
@@ -109,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Repository Structure
+              Repository Structure of the CANopen Stack library
             
           </span>
         </div>
@@ -1158,7 +1158,7 @@
 
 <h1 id="structure">Structure<a class="headerlink" href="#structure" title="Permanent link">#</a></h1>
 <h2 id="layout-of-repository">Layout of Repository<a class="headerlink" href="#layout-of-repository" title="Permanent link">#</a></h2>
-<p>The following description explains the directories within this repository.</p>
+<p>The following description explains the included directories of the repository <a href="https://github.com/embedded-office/canopen-stack">canopen-stack</a> in the released package.</p>
 <div class="highlight"><pre><span></span><code>  root
   +- src            : --- CANopen Stack source code ---
   |  +- config      : configuration files
@@ -1171,7 +1171,10 @@
   |  |  +- cia301   : standard protocols
   |  |  +- cia305   : layer setting service
 </code></pre></div>
-<p>When using the CANopen Stack, you need the <code>src</code> directory tree only.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>When cloning the CANopen Stack repository, you need the <code>src</code> directory tree only. The repository contains in addition a <code>test</code> directory with a collection of unit- and integration-tests running on the host.</p>
+</div>
 <h3 id="directory-config">Directory: config<a class="headerlink" href="#directory-config" title="Permanent link">#</a></h3>
 <p>This directory contains the configuration of the CANopen Stack. The intended purpose is to create a library with your cross-compiler with all source files in the directory <code>src</code> and a specific configuration, defined in the file <code>co_cfg.h</code>:</p>
 <div class="highlight"><pre><span></span><code>mandatory settings
