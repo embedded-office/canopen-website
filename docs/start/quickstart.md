@@ -5,7 +5,7 @@ description: The quickstart example describes in detail the steps to a running C
 
 # Quickstart
 
-The quickstart example describes in detail the steps to build a CANopen node. The source files are included in the example repository [canopen-stm32f7xx][1]. To get most out of this artice, you should clone this repository and follow in the real files during reading this article.
+The quickstart example describes in detail the steps to build a CANopen node. The source files are included in the example repository [canopen-stm32f7xx][1]. To get most out of this article, you should clone this repository and follow in the real files during reading this article.
 
 For setting up the hardware and software environment, please follow the `README.md` in the root of the example repository [canopen-stm32f7xx][1].
 
@@ -42,11 +42,13 @@ Due to the fact, that the central element of a CANopen node is the object dictio
 
 ### Object Dictionary
 
-**Description**
+#### Dictionary Object Array
+
+##### Description
 
 To keep the software as simple as possible, we will use a static object dictionary. In this case, the object dictionary is an array of object entries, declared as a constant array of object entries of type `CO_OBJ`. 
 
-**Implementation**
+##### Implementation
 
 ```c
   :
@@ -64,7 +66,7 @@ const CO_OBJ ClockOD[APP_OBJ_N] = {
 
 #### Mandatory Object Entries
 
-**Description**
+##### Description
 
 When we want to achieve compliance with the CiA301 specification, the object dictionary must hold some mandatory object entries:
 
@@ -80,7 +82,7 @@ When we want to achieve compliance with the CiA301 specification, the object dic
 | 1018h:03  | UNSIGNED32 | Const      | 0             | - Revision number  |
 | 1018h:04  | UNSIGNED32 | Const      | 0             | - Serial number    |
 
-**Implementation**
+##### Implementation
 
 The configuration of each object entry is a single configuration line within the object dictionary `CO_OBJ` array. The following figure shows how a single line is constructed:
 
@@ -140,9 +142,9 @@ A pointer to the variables and constants are stored in the corresponding object 
     When using architectures with pointer types lower than 32bit (e.g. 16bit microcontrollers), you can store only values up to the pointer width directly in the object dictionary. For larger values declare a constant variable and place a pointer to this constant into the object dictionary!
     ```
 
-#### SDO Server
+#### SDO Server Communication
 
-**Description**
+##### Description
 
 The settings for the SDO server are defined in CiA301 and must contain the following object dictionary entries:
 
@@ -152,7 +154,7 @@ The settings for the SDO server are defined in CiA301 and must contain the follo
 | 1200h:01  | UNSIGNED32 | Const  | 600h + node ID | - SDO Server Request COBID        |
 | 1200h:02  | UNSIGNED32 | Const  | 580h + node ID | - SDO Server Response COBID       |
 
-**Implementation**
+##### Implementation
 
 The following lines add the SDO server entries to the object dictionary:
 
@@ -172,7 +174,7 @@ The predefined COBIDs are dependent on the actual node ID. For this reason, the 
 
 #### Application Object Entries
 
-**Description**
+##### Description
 
 We need to add some manufacturer specific object entries to support the clock of the example application:
 
@@ -187,7 +189,7 @@ We need to add some manufacturer specific object entries to support the clock of
 
     These entries are placed within the manufacturer-specific area (from `2000h` up to `5FFFh`) and can be chosen freely (see CiA301). Entries outside of this range cannot be chosen freely, and should conform to the various CiA standards and profiles (e.g. CiA301 for communication profile area, CiA401 for generic IO modules, etc).
 
-**Implementation**
+##### Implementation
 
 These entries are created using the following lines of code:
 
@@ -213,7 +215,7 @@ The flag `CO_OBJ___A___` for the object entry `2100h:03` enables the "*asynchron
 
 #### TPDO Communication
 
-**Description**
+##### Description
 
 The communication settings for the TPDO must contain the following object entries:
 
@@ -223,7 +225,7 @@ The communication settings for the TPDO must contain the following object entrie
 | 1800h:01  | UNSIGNED32 | Const  | 40000180h + node ID | - PDO transmission COBID (no RTR) |
 | 1800h:02  | UNSIGNED8  | Const  | 254                 | - PDO transmission type           |
 
-**Implementation**
+##### Implementation
 
 See the following lines in the object dictionary:
 
@@ -242,7 +244,7 @@ The CANopen stack does not support remote CAN frames as they are no longer recom
 
 #### TPDO Data Mapping
 
-**Description**
+##### Description
 
 The mapping settings for the TPDO must contain the following object entries:
 
@@ -255,7 +257,7 @@ The mapping settings for the TPDO must contain the following object entries:
 
 How we get these values is explained in section [configuration of PDO mapping](../../usage/configuration/#pdo-mapping-value).
 
-**Implementation**
+##### Implementation
 
 This way of defining the payload for PDOs is part of the CiA301 standard and leads us to the following lines in the object dictionary:
 
@@ -275,7 +277,9 @@ const  uint32_t Obj1A00_03_20 = CO_LINK(0x2100, 0x03,  8);
 
 ### EMCY Error Specification
 
-**Description**
+#### Application EMCY
+
+##### Description
 
 We want to send a EMCY message, when we detect a hardware error (e.g. an unplugged EEPROM). The EMCY error code and error register flag is defined in the following table:
 
@@ -283,7 +287,7 @@ We want to send a EMCY message, when we detect a hardware error (e.g. an unplugg
 | ------------------- | ----------------------------- | ------------------------------ |
 | `APP_ERR_ID_EEPROM` | Bit 0 (`CO_EMCY_REG_GENERAL`) | 0x5000 (`CO_EMCY_CODE_HW_ERR`) |
 
-**Implementation**
+##### Implementation
 
 We define all possible identifiers as a handy enumeration.
 
@@ -326,11 +330,13 @@ static CO_EMCY_TBL AppEmcyTbl[APP_ERR_ID_NUM] = {
 
 ### CANopen Timers
 
-**Description**
+#### Application Timer
+
+##### Description
 
 The CANopen stack provides flexible timers for protocol and application usage. 
 
-**Implementation**
+##### Implementation
 
 Each software timer needs some memory for managing the lists and states of the timed action events:
 
@@ -342,13 +348,15 @@ CO_TMR_MEM TmrMem[APP_TMR_N];                /* Allocate timer memory */
   :
 ```
 
-### SDO Server Buffers
+### SDO Server Memory
 
-**Description**
+#### Transfer Buffers
+
+##### Description
 
 The CANopen node requires for each SDO server a certain amount of transmission buffers, in case the client is using segmented or block transfers to access large objects.
 
-**Implementation**
+##### Implementation
 
 Each SDO server needs memory for the segmented or block transfer requests.
 
@@ -356,9 +364,11 @@ Each SDO server needs memory for the segmented or block transfer requests.
 uint8_t SdoSrvMem[CO_SSDO_N * CO_SDO_BUF_BYTE];
 ```
 
-### Fill the Specification Structure
+### Specification Structure
 
-**Description**
+#### Additional Settings
+
+##### Description
 
 We want to act the CANopen node with
 
@@ -369,7 +379,7 @@ For our timer driver accuracy we want
 
 - timer granularity: `1µs`
 
-**Implementation**
+##### Implementation
 
 The required CANopen definitions are simple defines, provided for use in the specification structure below.
 
@@ -397,11 +407,21 @@ CO_NODE_SPEC AppSpec = {
 
 ## Clock HW
 
-**Description**
+### Driver Interface
 
-For connecting the CANopen stack to your microcontroller hardware, you need drivers for CAN controller, a hardware timer and a non-volatile memory. You find the connection setup in the file [src/app/clock_hw.c][4].
+#### Select Driver for Node
 
-**Implementation**
+##### Description
+
+For connecting a CANopen node to the microcontroller hardware, you need three drivers:
+
+- for the CAN controller, 
+- for a hardware timer, and
+- for a non-volatile memory
+
+You find the connection setup in the file [src/app/clock_hw.c][4]. The possible drivers are provided in the `/driver` directions.
+
+##### Implementation
 
 You can use a chip-vendor provided HAL for the implementation of the drivers, or use direct register access to perform the required actions - whatever you like. This example project provides drivers, using the ST Microelectronics HAL layer.
 
@@ -433,7 +453,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htmr)
 }
 ```
 
-Furthermore, the CAN bus message reception should work with receive interrupts to avoid loosing messages. The CAN receive interrupt handler should look similar to:
+Furthermore, the CAN bus message reception should work with receive interrupts to avoid losing messages. The CAN receive interrupt handler should look similar to:
 
 ```c
 /* ST HAL CAN receive interrupt callback */
@@ -446,16 +466,22 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 
 ## Clock App
 
+### Application Structure
+
 The CANopen application is realized in functions, reflecting two phases of the application:
 
-- **Application Startup** - where initialization of hardware and CANopen layer takes place. The function holds the background loop for processing timer events.
-- **Application Callback** - the cyclic started function holding the running application.
+- *Application Startup*: where initialization of hardware and CANopen layer takes place. The function holds the background loop for processing timer events.
+- *Application Callback*: the cyclic started function holding the running application.
 
 The application for this tiny example is implemented in a single file: [src/app/clock_app.c][5].
 
-### Application Start
+#### Application Start
 
-**Description**
+##### Description
+
+The CANopen Stack needs to setup once during startup. We want to start the CANopen node automatically with the NMT `OPERATIONAL` mode.
+
+##### Implementation
 
 This function is responsible for the CANopen Stack startup. The startup needs to connect the CANopen Stack layer with the filled specification structure:
 
@@ -480,7 +506,13 @@ CONodeStart(&Clk);
 CONmtSetMode(&Clk.Nmt, CO_OPERATIONAL);
 ```
 
-### Application Callback
+#### Application Callback
+
+##### Description
+
+The main functionallity is running once every second. We want to increase the clock values when in NMT `OPERATIONAL` mode. Otherwise, the clock stays unchanges.
+
+##### Implementation
 
 The timer callback function `AppClock()` includes the main functionality of the clock node:
 
