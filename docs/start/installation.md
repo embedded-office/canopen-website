@@ -1,3 +1,8 @@
+---
+title: Overview of the CANopen Ecosystem
+description: The free CANopen Stack includes multiple repositories for important aspects of embedded software development.
+---
+
 # Installation
 
 With version 4.4 the CANopen Stack project introduces an ecosystem, which supports you in project management. This is realized by using multiple repositories with independent version management for important aspects of an embedded software project setup:

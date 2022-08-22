@@ -1,4 +1,5 @@
 ---
 template: overrides/home.html
-title: CANopen Stack Documentation
+title: The API Reference and User Manual
+description: The free CANopen Stack project documentation describes the principle usage and some examples and includes various examples.
 ---

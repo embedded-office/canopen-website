@@ -1,3 +1,8 @@
+---
+title: Using the Object Dictionary
+description: Specify the heart of your CANopen device with a compact table of object entries on your resource limited system.
+---
+
 # Using Object Dictionary
 
 ## Object Dictionary

@@ -1,3 +1,8 @@
+---
+title: SDO Client API Reference
+description: This free CANopen Stack support an unlimited number of SDO Clients in your CANopen device.
+---
+
 # SDO Client
 
 The CSDO component provides an interface to the CANopen SDO client.

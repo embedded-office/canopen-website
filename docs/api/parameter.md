@@ -1,3 +1,8 @@
+---
+title: Parameter Storage API Reference
+description: This free CANopen Stack supports an unlimited number of parameter storage groups in your CANopen device.
+---
+
 # Parameter Storage
 
 The parameter component provides an interface to the parameter group handling.

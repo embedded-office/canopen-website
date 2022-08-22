@@ -1,3 +1,8 @@
+---
+title: Controlling the Node
+description: You can control all aspects of the CANopen node by a wide range of service functions.
+---
+
 # Controlling the Node
 
 ## CANopen Node

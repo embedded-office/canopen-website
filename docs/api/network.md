@@ -1,3 +1,8 @@
+---
+title: Network Management API Reference
+description: This free CANopen Stack support a rich set of functions to control the state of your CANopen device.
+---
+
 # Network Management
 
 The network component provides an interface to the CANopen mode control, the node management, and the heartbeat handling.

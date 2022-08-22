@@ -1,3 +1,8 @@
+---
+title: CAN Device Driver Interface
+description: The CANopen Stack library expects a set of functions for controlling the local CAN controller.
+---
+
 # CAN Driver
 
 ## CAN Driver Functions

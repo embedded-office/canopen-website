@@ -1,3 +1,8 @@
+---
+title: Object Entry API Reference
+description: This free CANopen Stack support a compact storage of an unlimited number of object entries in your CANopen device.
+---
+
 # Object Entry
 
 The object component provides an interface to the individual object entries.

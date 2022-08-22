@@ -1,3 +1,8 @@
+---
+title: Usage of Timed Action in the Application
+description: The CANopen Stack library provides a service for efficient handling of timed actions.
+---
+
 # Timed Actions
 
 ## CANopen Timer

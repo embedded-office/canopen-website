@@ -1,3 +1,8 @@
+---
+title: Timer Handling API Reference
+description: This free CANopen Stack supports an timer handling with highest accuracy with no intermediate interrupts on your CANopen device.
+---
+
 # Timer Handling
 
 The timer component provides an interface to function executions initiated by a timer.

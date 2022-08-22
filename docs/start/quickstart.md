@@ -1,3 +1,7 @@
+---
+title: The CANopen Quickstart Project
+description: The quickstart example describes in detail the steps to a running CANopen node with the free CANopen Stack.
+---
 
 # Quickstart
 

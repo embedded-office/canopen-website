@@ -1,3 +1,8 @@
+---
+title: Object Dictionary API Reference
+description: This free CANopen Stack support an unlimited number of object entries in your object dictionary.
+---
+
 # Object Dictionary
 
 The object dictionary component provides the interface to object entries in the object dictionary.

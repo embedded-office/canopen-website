@@ -1,3 +1,8 @@
+---
+title: Dynamic Object Dictionary Descriptions
+description: This example describes how we can setup a dynamic object dictionary in a CANopen device.
+---
+
 # Dynamic Object Dictionary - Part I
 
 Projects using CANopen may need to realize an adaptive CANopen Object Dictionary. For example, the CANopen device acts as a standard IO-Device or as a proprietary device - depending on external system settings. In this example, we will discover the needed steps to get a fully dynamic CANopen Object Dictionary for our CANopen Stack.
