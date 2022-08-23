@@ -1543,8 +1543,12 @@
 
 
 <h1 id="quickstart">Quickstart<a class="headerlink" href="#quickstart" title="Permanent link">#</a></h1>
-<p>The quickstart example describes in detail the steps to build a CANopen node. The source files are included in the example repository <a href="https://github.com/embedded-office/canopen-stm32f7xx" title="Repository: canopen-stm32f7xx">canopen-stm32f7xx</a>. To get most out of this article, you should clone this repository and follow in the real files during reading this article.</p>
-<p>For setting up the hardware and software environment, please follow the <code>README.md</code> in the root of the example repository <a href="https://github.com/embedded-office/canopen-stm32f7xx" title="Repository: canopen-stm32f7xx">canopen-stm32f7xx</a>.</p>
+<p>The quickstart example describes in detail the steps to build a CANopen node. The source files are included in the example repositories:</p>
+<ul>
+<li><a href="https://github.com/embedded-office/canopen-stm32f4xx" title="Repository: canopen-stm32f4xx">canopen-stm32f4xx</a> - for devices in STM32F4 Series (example device: STM32F446)</li>
+<li><a href="https://github.com/embedded-office/canopen-stm32f7xx" title="Repository: canopen-stm32f7xx">canopen-stm32f7xx</a> - for devices in STM32F7 Series (example device: STM32F769)</li>
+</ul>
+<p>To get most out of this article, you should clone this repository and follow in the real files during reading this article. For setting up the hardware and software environment, please follow the <code>README.md</code> in the root of the example repository.</p>
 <h2 id="functional-specification">Functional Specification<a class="headerlink" href="#functional-specification" title="Permanent link">#</a></h2>
 <p>In this quickstart example, we will create a <em>CANopen Clock</em>. This clock is not a serious application, the example just illustrates the key principles of creating a device using the CANopen Stack.</p>
 <ul>
@@ -2056,19 +2060,40 @@
 <h5 id="implementation_10">Implementation<a class="headerlink" href="#implementation_10" title="Permanent link">#</a></h5>
 <p>You can use a chip-vendor provided HAL for the implementation of the drivers, or use direct register access to perform the required actions - whatever you like. This example project provides drivers, using the ST Microelectronics HAL layer.</p>
 <p>First we select and connect a set of drivers to the CANopen stack:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">canopen-stm32f4xx</label><label for="__tabbed_1_2">canopen-stm32f7xx</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="w">  </span><span class="o">:</span><span class="w"></span>
 <span class="cm">/* select application drivers */</span><span class="w"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;drv_can1_stm32f7xx.h&quot;</span><span class="c1">       /* CAN driver (CAN1)              */</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;drv_timer2_stm32f7xx.h&quot;</span><span class="c1">     /* Timer driver (TIM2)            */</span><span class="cp"></span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;drv_nvm_i2c1_at24c256.h&quot;</span><span class="c1">    /* NVM driver (AT24C256 via I2C1) */</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;drv_can_can1.h&quot;</span><span class="c1">               /* CAN driver (CAN1)                 */</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;drv_timer_tim2.h&quot;</span><span class="c1">             /* Timer driver (TIM2)               */</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;drv_nvm_fmpi2c1_at24c256.h&quot;</span><span class="c1">   /* NVM driver (AT24C256 via FMPI2C1) */</span><span class="cp"></span>
 <span class="w">  </span><span class="o">:</span><span class="w"></span>
 <span class="k">struct</span><span class="w"> </span><span class="nc">CO_IF_DRV_T</span><span class="w"> </span><span class="n">AppDriver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="o">&amp;</span><span class="n">STM32F7xxCan1Driver</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="o">&amp;</span><span class="n">STM32F7xxTimer2Driver</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="o">&amp;</span><span class="n">I2C1_AT24C256NvmDriver</span><span class="w"></span>
+<span class="w">  </span><span class="o">&amp;</span><span class="n">STM32F4xx_CAN1_CanDriver</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="o">&amp;</span><span class="n">STM32F4xx_TIM2_TimerDriver</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="o">&amp;</span><span class="n">STM32F4xx_FMPI2C1_AT24C256_NvmDriver</span><span class="w"></span>
 <span class="p">};</span><span class="w"></span>
 <span class="w">  </span><span class="o">:</span><span class="w"></span>
 </code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="o">:</span><span class="w"></span>
+<span class="cm">/* select application drivers */</span><span class="w"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;drv_can_can1.h&quot;</span><span class="c1">               /* CAN driver (CAN1)              */</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;drv_timer_tim2.h&quot;</span><span class="c1">             /* Timer driver (TIM2)            */</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;drv_nvm_i2c1_at24c256.h&quot;</span><span class="c1">      /* NVM driver (AT24C256 via I2C1) */</span><span class="cp"></span>
+<span class="w">  </span><span class="o">:</span><span class="w"></span>
+<span class="k">struct</span><span class="w"> </span><span class="nc">CO_IF_DRV_T</span><span class="w"> </span><span class="n">AppDriver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="o">&amp;</span><span class="n">STM32F7xx_CAN1_CanDriver</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="o">&amp;</span><span class="n">STM32F7xx_TIM2_TimerDriver</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="o">&amp;</span><span class="n">STM32F7xx_I2C1_AT24C256_NvmDriver</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+<span class="w">  </span><span class="o">:</span><span class="w"></span>
+</code></pre></div>
+</div>
+</div>
+</div>
 <p>When you write your device driver, you will need to set up a hardware timer interrupt within your low-level layer and configure a periodic interrupt source with a frequency of <code>APP_TICKS_PER_SEC</code>. The timer interrupt service handler should look something like this:</p>
 <div class="highlight"><pre><span></span><code><span class="cm">/* ST HAL TIM2 overflow interrupt callback */</span><span class="w"></span>
 <span class="kt">void</span><span class="w"> </span><span class="nf">HAL_TIM_PeriodElapsedCallback</span><span class="p">(</span><span class="n">TIM_HandleTypeDef</span><span class="w"> </span><span class="o">*</span><span class="n">htmr</span><span class="p">)</span><span class="w"></span>

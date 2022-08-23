@@ -1159,11 +1159,29 @@
 <h1 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">#</a></h1>
 <p>With version 4.4 the CANopen Stack project introduces an ecosystem, which supports you in project management. This is realized by using multiple repositories with independent version management for important aspects of an embedded software project setup:</p>
 <ul>
-<li><strong><a href="https://github.com/embedded-office/cmake-scripts" title="Repository: cmake-scripts">cmake-scripts</a></strong> - this repository is responsible for the embedded toolchains and the component package management.</li>
 <li><strong><a href="https://github.com/embedded-office/canopen-stack" title="Repository: canopen-stack">canopen-stack</a></strong> - this repository represents the platform independent CANopen stack component.</li>
-<li><strong><a href="https://github.com/embedded-office/canopen-stm32f7xx" title="Repository: canopen-stm32f7xx">canopen-stm32f7xx</a></strong> - this repository contains a complete Quickstart example setup for the device STM32F769. The adaption to other devices out of the STM32F7 series are small.</li>
+<li><strong><a href="https://github.com/embedded-office/cmake-scripts" title="Repository: cmake-scripts">cmake-scripts</a></strong> - this repository is responsible for the embedded toolchains and the component package management.</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Target Quickstart Projects</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">STM32F4 Series</label><label for="__tabbed_1_2">STM32F7 Series</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<ul>
+<li><strong><a href="https://github.com/embedded-office/canopen-stm32f4xx" title="Repository: canopen-stm32f4xx">canopen-stm32f4xx</a></strong> - this repository contains a complete Quickstart example setup for the device STM32F446. The adaption to other devices out of the STM32F4xx series are small.</li>
+<li><strong><a href="https://github.com/embedded-office/STM32CubeF4" title="Repository: STM32CubeF4">STM32CubeF4</a></strong> - this fork of the ST Microelectronics HAL package is integrated into the CMake build system and packaged with minimal required source files to get the ST HAL/LL drivers working (No middleware and documentation).</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li><strong><a href="https://github.com/embedded-office/canopen-stm32f7xx" title="Repository: canopen-stm32f7xx">canopen-stm32f7xx</a></strong> - this repository contains a complete Quickstart example setup for the device STM32F769. The adaption to other devices out of the STM32F7xx series are small.</li>
 <li><strong><a href="https://github.com/embedded-office/STM32CubeF7" title="Repository: STM32CubeF7">STM32CubeF7</a></strong> - this fork of the ST Microelectronics HAL package is integrated into the CMake build system and packaged with minimal required source files to get the ST HAL/LL drivers working (No middleware and documentation).</li>
 </ul>
+</div>
+</div>
+</div>
+</div>
+<p>See the following illustration which shows the relations between these repositories:</p>
 <figure>
 <p><img alt="The CANopen Stack ecosystem" src="../../assets/images/illustrations/canopen-ecosystem.svg" title="The CANopen Stack ecosystem" width="700px" /></p>
 </figure>
