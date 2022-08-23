@@ -99,7 +99,7 @@ if (obj == 0) {
 
 !!! note
 
-    When using a static object dictionary, you can store and reuse the pointer to the identified object entry with the [Object Entry][1] access functions. The pointer to the object entry will NOT change during runtime in a static object dictionary.
+    When using a static object dictionary, you can store and reuse the pointer to the identified object entry with the [Object Entry][] access functions. The pointer to the object entry will NOT change during runtime in a static object dictionary.
 
 !!! warning "Important"
 
@@ -470,4 +470,6 @@ if (err != CO_ERR_NONE) {
     This function uses `CODictFind()` on each function call. To improve access performance for multiple accesses to a single object entry, the application may use `CODictFind()` once and `COObjWrValue()` multiple times.
 
 
-[1]: ../object
+
+[object entry]: ../object
+    "Object Entry"

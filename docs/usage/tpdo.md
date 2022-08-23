@@ -18,7 +18,7 @@ The CANopen stack provides service functions for triggering PDO transmission on 
 
 - **Object Change** - transmit all PDOs with a configured mapping to an object which is marked as asynchronous on changed values
 
-For the detailed object dictionary description for the TPDO communication settings, see [Transmit PDO Communication][1]
+For the detailed object dictionary description for the TPDO communication settings, see [Transmit PDO Communication][]
 
 
 ### Timer Trigger
@@ -143,4 +143,6 @@ In this example, the TPDO #7 is triggered after the receiption of every 4-th SYN
     The standard entries for subindex 3 and 5 are not used. Therefore, we adjust the highest subindex in object entry with subindex 00h.
 
 
-[1]: ../configuration#transmit-pdo-communication
+
+[transmit pdo communication]: ../configuration#transmit-pdo-communication
+    "Transmit PDO Communication"

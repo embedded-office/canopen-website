@@ -32,7 +32,7 @@ The **subindex 2h** is used to program the firmware image into the FLASH memory 
 
 ### Type: Control Commands
 
-Lets implement the firmware control user type as shown in [CANopen Usage: User Object][1]:
+Lets implement the firmware control user type as shown in [CANopen Usage: User Object][user object]:
 
 ```c
 uint32_t FwCtrlSize (CO_OBJ *obj, CO_NODE *node, uint32_t width);
@@ -148,4 +148,5 @@ CO_ERR FwImageWrite(CO_OBJ *obj, CO_NODE *node, void *buffer, uint32_t size);
 
 
 
-[1]: ../../usage/dictionary#user-objects
+[user object]: ../../usage/dictionary#user-objects
+    "CANopen Usage: User Object"

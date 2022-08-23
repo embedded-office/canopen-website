@@ -38,7 +38,7 @@ const CO_OBJ DemoOD[] = {
 
 !!! note
 
-    The object dictionary can manage different object entry types with different properties. This information is encoded within the [object property flags][1] and the [object type functions][2] and is described in detail in the configuration section.
+    The object dictionary can manage different object entry types with different properties. This information is encoded within the [object property flags][] and the [object type functions][] and is described in detail in the configuration section.
 
 The update of the provided basic and system object types within the object dictionary is managed by the CANopen stack. The application may read or write these objects at any time. Use the service function groups CODict…() and COObj…() for accessing the object dictionary.
 
@@ -333,5 +333,8 @@ CO_ERR MyTypeWrite(CO_OBJ *obj, CO_NODE *node, void *buffer, uint32_t size)
 ---
 
 
-[1]: /usage/configuration/#property-flags
-[2]: /usage/configuration/#object-type-interface
+
+[object property flags]: ../configuration/#property-flags
+    "Configuration of Property Flags"
+[object type functions]: ../configuration/#object-type-interface
+    "Configuration of Type Functions"

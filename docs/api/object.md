@@ -112,7 +112,7 @@ int16_t COObjRdBufCont(CO_OBJ  *obj,
 
 **Example**
 
-see [Example in COObjRdBufStart()][1]
+see [Example in COObjRdBufStart()][coobjrdbufstart]
 
 !!! attention
 
@@ -296,7 +296,7 @@ int16_t COObjWrBufCont(CO_OBJ  *obj,
 
 **Example**
 
-see [Example in COObjWrBufStart()][2]
+see [Example in COObjWrBufStart()][coobjwrbufstart]
 
 #### COObjWrBufStart()
 
@@ -395,5 +395,7 @@ err   = COObjWrValue(entry, &AppNode, &value, sizeof(value));
 ```
 
 
-[1]: ../object/#coobjrdbufstart
-[2]: ../object/#coobjwrbufstart
+[coobjrdbufstart]: ../object/#coobjrdbufstart
+    "Example in COObjRdBufStart()"
+[coobjwrbufstart]: ../object/#coobjwrbufstart
+    "Example in COObjWrBufStart()"
