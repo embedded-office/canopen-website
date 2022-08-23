@@ -5,9 +5,12 @@ description: The quickstart example describes in detail the steps to a running C
 
 # Quickstart
 
-The quickstart example describes in detail the steps to build a CANopen node. The source files are included in the example repository [canopen-stm32f7xx][]. To get most out of this article, you should clone this repository and follow in the real files during reading this article.
+The quickstart example describes in detail the steps to build a CANopen node. The source files are included in the example repositories:
 
-For setting up the hardware and software environment, please follow the `README.md` in the root of the example repository [canopen-stm32f7xx][].
+- [canopen-stm32f4xx][] - for devices in STM32F4 Series (example device: STM32F446)
+- [canopen-stm32f7xx][] - for devices in STM32F7 Series (example device: STM32F769)
+
+To get most out of this article, you should clone this repository and follow in the real files during reading this article. For setting up the hardware and software environment, please follow the `README.md` in the root of the example repository.
 
 ## Functional Specification
 
@@ -429,20 +432,39 @@ You can use a chip-vendor provided HAL for the implementation of the drivers, or
 
 First we select and connect a set of drivers to the CANopen stack:
 
-```c
-  :
-/* select application drivers */
-#include "drv_can1_stm32f7xx.h"       /* CAN driver (CAN1)              */
-#include "drv_timer2_stm32f7xx.h"     /* Timer driver (TIM2)            */
-#include "drv_nvm_i2c1_at24c256.h"    /* NVM driver (AT24C256 via I2C1) */
-  :
-struct CO_IF_DRV_T AppDriver = {
-    &STM32F7xxCan1Driver,
-    &STM32F7xxTimer2Driver,
-    &I2C1_AT24C256NvmDriver
-};
-  :
-```
+=== "canopen-stm32f4xx"
+
+    ```c
+      :
+    /* select application drivers */
+    #include "drv_can_can1.h"               /* CAN driver (CAN1)                 */
+    #include "drv_timer_tim2.h"             /* Timer driver (TIM2)               */
+    #include "drv_nvm_fmpi2c1_at24c256.h"   /* NVM driver (AT24C256 via FMPI2C1) */
+      :
+    struct CO_IF_DRV_T AppDriver = {
+      &STM32F4xx_CAN1_CanDriver,
+      &STM32F4xx_TIM2_TimerDriver,
+      &STM32F4xx_FMPI2C1_AT24C256_NvmDriver
+    };
+      :
+    ```
+
+=== "canopen-stm32f7xx"
+
+    ```c
+      :
+    /* select application drivers */
+    #include "drv_can_can1.h"               /* CAN driver (CAN1)              */
+    #include "drv_timer_tim2.h"             /* Timer driver (TIM2)            */
+    #include "drv_nvm_i2c1_at24c256.h"      /* NVM driver (AT24C256 via I2C1) */
+      :
+    struct CO_IF_DRV_T AppDriver = {
+      &STM32F7xx_CAN1_CanDriver,
+      &STM32F7xx_TIM2_TimerDriver,
+      &STM32F7xx_I2C1_AT24C256_NvmDriver
+    };
+      :
+    ```
 
 When you write your device driver, you will need to set up a hardware timer interrupt within your low-level layer and configure a periodic interrupt source with a frequency of `APP_TICKS_PER_SEC`. The timer interrupt service handler should look something like this:
 
@@ -580,6 +602,8 @@ static void AppClock(void *p_arg)
     "Architectural Overview"
 [object entry definition]: ../assets/images/illustrations/canopen-object-entry.svg
     "Object Entry Definition"
+[canopen-stm32f4xx]: https://github.com/embedded-office/canopen-stm32f4xx
+    "Repository: canopen-stm32f4xx"
 [canopen-stm32f7xx]: https://github.com/embedded-office/canopen-stm32f7xx
     "Repository: canopen-stm32f7xx"
 [pdo mapping]: ../../usage/configuration/#pdo-mapping-value
