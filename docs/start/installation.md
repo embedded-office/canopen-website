@@ -7,10 +7,22 @@ description: The free CANopen Stack includes multiple repositories for important
 
 With version 4.4 the CANopen Stack project introduces an ecosystem, which supports you in project management. This is realized by using multiple repositories with independent version management for important aspects of an embedded software project setup:
 
-- **[cmake-scripts][]** - this repository is responsible for the embedded toolchains and the component package management.
 - **[canopen-stack][]** - this repository represents the platform independent CANopen stack component.
-- **[canopen-stm32f7xx][]** - this repository contains a complete Quickstart example setup for the device STM32F769. The adaption to other devices out of the STM32F7 series are small.
-- **[STM32CubeF7][]** - this fork of the ST Microelectronics HAL package is integrated into the CMake build system and packaged with minimal required source files to get the ST HAL/LL drivers working (No middleware and documentation).
+- **[cmake-scripts][]** - this repository is responsible for the embedded toolchains and the component package management.
+
+!!! info "Target Quickstart Projects"
+
+    === "STM32F4 Series"
+
+        - **[canopen-stm32f4xx][]** - this repository contains a complete Quickstart example setup for the device STM32F446. The adaption to other devices out of the STM32F4xx series are small.
+        - **[STM32CubeF4][]** - this fork of the ST Microelectronics HAL package is integrated into the CMake build system and packaged with minimal required source files to get the ST HAL/LL drivers working (No middleware and documentation).
+
+    === "STM32F7 Series"
+
+        - **[canopen-stm32f7xx][]** - this repository contains a complete Quickstart example setup for the device STM32F769. The adaption to other devices out of the STM32F7xx series are small.
+        - **[STM32CubeF7][]** - this fork of the ST Microelectronics HAL package is integrated into the CMake build system and packaged with minimal required source files to get the ST HAL/LL drivers working (No middleware and documentation).
+
+See the following illustration which shows the relations between these repositories:
 
 <figure markdown>
   ![The CANopen Stack ecosystem][ecosystem]{ width=700px }
@@ -74,8 +86,12 @@ Add the source files and include paths to a library project (see [repository str
     "Repository: canopen-stack"
 [canopen-stm32f7xx]: https://github.com/embedded-office/canopen-stm32f7xx
     "Repository: canopen-stm32f7xx"
+[canopen-stm32f4xx]: https://github.com/embedded-office/canopen-stm32f4xx
+    "Repository: canopen-stm32f4xx"
 [stm32cubef7]: https://github.com/embedded-office/STM32CubeF7
     "Repository: STM32CubeF7"
+[stm32cubef4]: https://github.com/embedded-office/STM32CubeF4
+    "Repository: STM32CubeF4"
 [repository structure]: ../structure
     "Structure of canopen-stack repository"
 [cmake-scripts]: https://github.com/embedded-office/cmake-scripts
