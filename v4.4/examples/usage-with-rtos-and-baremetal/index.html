@@ -1267,23 +1267,23 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../../api/node/#conodeinit"><code>CONodeInit()</code></a></td>
+<td><a href="../../api/node/#conodeinit" title="CONodeInit()"><code>CONodeInit()</code></a></td>
 <td>Initialization of CANopen stack</td>
 </tr>
 <tr>
-<td><a href="../../api/node/#conodestart"><code>CONodeStart()</code></a></td>
+<td><a href="../../api/node/#conodestart" title="CONodeStart()"><code>CONodeStart()</code></a></td>
 <td>Start of CANopen stack</td>
 </tr>
 <tr>
-<td><a href="../../api/node/#conodeprocess"><code>CONodeProcess()</code></a></td>
+<td><a href="../../api/node/#conodeprocess" title="CONodeProcess()"><code>CONodeProcess()</code></a></td>
 <td>Processing of CAN communication</td>
 </tr>
 <tr>
-<td><a href="../../api/timer/#cotmrservice"><code>COTmrService()</code></a></td>
+<td><a href="../../api/timer/#cotmrservice" title="COTmrService()"><code>COTmrService()</code></a></td>
 <td>Trigger elapsed configured time quanta</td>
 </tr>
 <tr>
-<td><a href="../../api/timer/#cotmrprocess"><code>COTmrProcess()</code></a></td>
+<td><a href="../../api/timer/#cotmrprocess" title="COTmrProcess()"><code>COTmrProcess()</code></a></td>
 <td>Processing of timed actions</td>
 </tr>
 </tbody>
@@ -1364,7 +1364,7 @@
 <p>Both hardware components are producing asynchronous events. We collect these events by the interrupt service routines (ISR) <strong>CAN Receive ISR</strong> and <strong>Cyclic Timer ISR</strong>.</p>
 <p>For the processing of the events we use two separate tasks for <strong>Node Processing</strong> and <strong>Timer Processing</strong>. The <em>Node Processing</em> is responsible for all CAN communication requests. The <em>Time Processing</em> is responsible for all timed actions.</p>
 <h3 id="rtos-startup">RTOS Startup<a class="headerlink" href="#rtos-startup" title="Permanent link">#</a></h3>
-<p>Let's have a look in the implementation for the <a href="https://www.embedded-office.com/products/flexible-safety-rtos">Flexible Safety RTOS</a>. There is no limitation to this RTOS; you can use any RTOS you already have or want.</p>
+<p>Let's have a look in the implementation for the <a href="https://www.embedded-office.com/products/flexible-safety-rtos" title="Flexible Safety RTOS">Flexible Safety RTOS</a>. There is no limitation to this RTOS; you can use any RTOS you already have or want.</p>
 <p>The following source shows the global variables and the initialization and startup of the CANopen device node.</p>
 <p>The external variable <code>AppSpec</code> is a part of the CANopen configuration, see quickstart for details. The global variable <code>MyNode</code> represents the CANopen node itself.</p>
 <div class="highlight"><pre><span></span><code><span class="cm">/* get external node specification */</span><span class="w"></span>

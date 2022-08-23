@@ -1264,7 +1264,7 @@ With the second function call <code>CONodeStart()</code> the bootup message is s
   I--&gt;&gt;-S: CAN frame
   S--&gt;&gt;-A: ok</code></pre>
 <h3 id="node-stop">Node Stop<a class="headerlink" href="#node-stop" title="Permanent link">#</a></h3>
-<p>Stopping a node is typically performed by the CAN network with <a href="../overview#autonomous-external-request">autonomous requests</a>. Nevertheless, the CANopen stack provides a service function to switch the NMT modes by the application. The following line switches the node into the NMT mode <code>CO_STOP</code>.</p>
+<p>Stopping a node is typically performed by the CAN network with <a href="../overview#autonomous-external-request" title="Autonomous External Requests">autonomous requests</a>. Nevertheless, the CANopen stack provides a service function to switch the NMT modes by the application. The following line switches the node into the NMT mode <code>CO_STOP</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="n">CONmtSetMode</span><span class="p">(</span><span class="o">&amp;</span><span class="n">demo</span><span class="p">.</span><span class="n">Nmt</span><span class="p">,</span><span class="w"> </span><span class="n">CO_STOP</span><span class="p">);</span><span class="w"></span>
 </code></pre></div>
 <p>The internal behavior of the CANopen stack is shown in the following diagram:</p>

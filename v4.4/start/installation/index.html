@@ -1159,16 +1159,16 @@
 <h1 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">#</a></h1>
 <p>With version 4.4 the CANopen Stack project introduces an ecosystem, which supports you in project management. This is realized by using multiple repositories with independent version management for important aspects of an embedded software project setup:</p>
 <ul>
-<li><strong><a href="https://github.com/embedded-office/cmake-scripts">cmake-scripts</a></strong> - this repository is responsible for the embedded toolchains and the component package management.</li>
-<li><strong><a href="https://github.com/embedded-office/canopen-stack">canopen-stack</a></strong> - this repository represents the platform independent CANopen stack component.</li>
-<li><strong><a href="https://github.com/embedded-office/canopen-stm32f7xx">canopen-stm32f7xx</a></strong> - this repository contains a complete Quickstart example setup for the device STM32F769. The adaption to other devices out of the STM32F7 series are small.</li>
-<li><strong><a href="https://github.com/embedded-office/STM32CubeF7">STM32CubeF7</a></strong> - this fork of the ST Microelectronics HAL package is integrated into the CMake build system and packaged with minimal required source files to get the ST HAL/LL drivers working (No middleware and documentation).</li>
+<li><strong><a href="https://github.com/embedded-office/cmake-scripts" title="Repository: cmake-scripts">cmake-scripts</a></strong> - this repository is responsible for the embedded toolchains and the component package management.</li>
+<li><strong><a href="https://github.com/embedded-office/canopen-stack" title="Repository: canopen-stack">canopen-stack</a></strong> - this repository represents the platform independent CANopen stack component.</li>
+<li><strong><a href="https://github.com/embedded-office/canopen-stm32f7xx" title="Repository: canopen-stm32f7xx">canopen-stm32f7xx</a></strong> - this repository contains a complete Quickstart example setup for the device STM32F769. The adaption to other devices out of the STM32F7 series are small.</li>
+<li><strong><a href="https://github.com/embedded-office/STM32CubeF7" title="Repository: STM32CubeF7">STM32CubeF7</a></strong> - this fork of the ST Microelectronics HAL package is integrated into the CMake build system and packaged with minimal required source files to get the ST HAL/LL drivers working (No middleware and documentation).</li>
 </ul>
 <figure>
 <p><img alt="The CANopen Stack ecosystem" src="../../assets/images/illustrations/canopen-ecosystem.svg" title="The CANopen Stack ecosystem" width="700px" /></p>
 </figure>
 <h2 id="add-component-in-cmake-recommended">Add Component in CMake (recommended)<a class="headerlink" href="#add-component-in-cmake-recommended" title="Permanent link">#</a></h2>
-<p>The build system is realized with <a href="https://cmake.org/">CMake</a> and the <a href="https://github.com/cpm-cmake/CPM.cmake">CPM.cmake</a> package management. See <a href="https://github.com/embedded-office/cmake-scripts">cmake-scripts</a> for details. Including the CANopen Stack into the project is done during the configuration phase of the build environment. During this phase, the CANopen Stack is fetched in the defined version and is available for usage.</p>
+<p>The build system is realized with <a href="https://cmake.org/" title="Website: CMake">CMake</a> and the <a href="https://github.com/cpm-cmake/CPM.cmake" title="Repository: CPM.cmake">CPM.cmake</a> package management. See <a href="https://github.com/embedded-office/cmake-scripts" title="Repository: cmake-scripts">cmake-scripts</a> for details. Including the CANopen Stack into the project is done during the configuration phase of the build environment. During this phase, the CANopen Stack is fetched in the defined version and is available for usage.</p>
 <div class="highlight"><pre><span></span><code><span class="nb">set</span><span class="p">(</span><span class="s">CO_TARGET</span><span class="w">   </span><span class="s2">&quot;canopen-stack&quot;</span><span class="p">)</span>
 <span class="nb">set</span><span class="p">(</span><span class="s">CO_PROJECT</span><span class="w">  </span><span class="s2">&quot;embedded-office/canopen-stack&quot;</span><span class="p">)</span>
 <span class="nb">set</span><span class="p">(</span><span class="s">CO_VERSION</span><span class="w">  </span><span class="s2">&quot;4.4.0&quot;</span><span class="p">)</span>
@@ -1179,13 +1179,13 @@
 <span class="p">)</span>
 </code></pre></div>
 <h2 id="getting-the-source">Getting the Source<a class="headerlink" href="#getting-the-source" title="Permanent link">#</a></h2>
-<p>When you just want to use the source code of the platform independent CANopen Stack, all you need to do is getting the repository <a href="https://github.com/embedded-office/canopen-stack">canopen-stack</a> and use the files in your prefered build system. There are multiple ways in getting the source code:</p>
+<p>When you just want to use the source code of the platform independent CANopen Stack, all you need to do is getting the repository <a href="https://github.com/embedded-office/canopen-stack" title="Repository: canopen-stack">canopen-stack</a> and use the files in your prefered build system. There are multiple ways in getting the source code:</p>
 <h3 id="clone-repository">Clone Repository<a class="headerlink" href="#clone-repository" title="Permanent link">#</a></h3>
-<p>Clone the <a href="https://github.com/embedded-office/canopen-stack">canopen-stack</a> repository from github. This is good if you want to review and merge future updates into your project:</p>
+<p>Clone the <a href="https://github.com/embedded-office/canopen-stack" title="Repository: canopen-stack">canopen-stack</a> repository from github. This is good if you want to review and merge future updates into your project:</p>
 <div class="highlight"><pre><span></span><code>git clone https://github.com/embedded-office/canopen-stack.git
 </code></pre></div>
 <h3 id="download-zip-file">Download ZIP File<a class="headerlink" href="#download-zip-file" title="Permanent link">#</a></h3>
-<p>Download and unzip the file from the <a href="https://github.com/embedded-office/canopen-stack">canopen-stack</a> repository. This is good if you want to work on hosts without internet access.</p>
+<p>Download and unzip the file from the <a href="https://github.com/embedded-office/canopen-stack" title="Repository: canopen-stack">canopen-stack</a> repository. This is good if you want to work on hosts without internet access.</p>
 <ul>
 <li>Click on <code>Releases</code></li>
 <li>Download the package <code>canopen-stack-src.zip</code></li>
@@ -1196,9 +1196,9 @@
 <p>This is exactly what the CMake command <code>CPMAddPackage()</code> does during project configuration.</p>
 </div>
 <h3 id="fork-repository">Fork Repository<a class="headerlink" href="#fork-repository" title="Permanent link">#</a></h3>
-<p>Fork the github repository <a href="https://github.com/embedded-office/canopen-stack">canopen-stack</a> into your GitHub account. This is good if you want to collaborate enhancements or bugfixes to the project. Any improvement of the project is highly welcome.</p>
+<p>Fork the github repository <a href="https://github.com/embedded-office/canopen-stack" title="Repository: canopen-stack">canopen-stack</a> into your GitHub account. This is good if you want to collaborate enhancements or bugfixes to the project. Any improvement of the project is highly welcome.</p>
 <h2 id="cross-compile-for-target">Cross-compile for Target<a class="headerlink" href="#cross-compile-for-target" title="Permanent link">#</a></h2>
-<p>Add the source files and include paths to a library project (see <a href="../structure">Repository Structure</a>). Create a library with your cross-compiler and share this library together with the include files with your embedded software project.</p>
+<p>Add the source files and include paths to a library project (see <a href="../structure" title="Structure of canopen-stack repository">repository structure</a>). Create a library with your cross-compiler and share this library together with the include files with your embedded software project.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This is exactly what the CMake command <code>CPMAddPackage()</code> prepares during project configuration.</p>

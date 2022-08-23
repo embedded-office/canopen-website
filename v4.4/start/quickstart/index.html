@@ -1543,8 +1543,8 @@
 
 
 <h1 id="quickstart">Quickstart<a class="headerlink" href="#quickstart" title="Permanent link">#</a></h1>
-<p>The quickstart example describes in detail the steps to build a CANopen node. The source files are included in the example repository <a href="https://github.com/embedded-office/canopen-stm32f7xx">canopen-stm32f7xx</a>. To get most out of this article, you should clone this repository and follow in the real files during reading this article.</p>
-<p>For setting up the hardware and software environment, please follow the <code>README.md</code> in the root of the example repository <a href="https://github.com/embedded-office/canopen-stm32f7xx">canopen-stm32f7xx</a>.</p>
+<p>The quickstart example describes in detail the steps to build a CANopen node. The source files are included in the example repository <a href="https://github.com/embedded-office/canopen-stm32f7xx" title="Repository: canopen-stm32f7xx">canopen-stm32f7xx</a>. To get most out of this article, you should clone this repository and follow in the real files during reading this article.</p>
+<p>For setting up the hardware and software environment, please follow the <code>README.md</code> in the root of the example repository <a href="https://github.com/embedded-office/canopen-stm32f7xx" title="Repository: canopen-stm32f7xx">canopen-stm32f7xx</a>.</p>
 <h2 id="functional-specification">Functional Specification<a class="headerlink" href="#functional-specification" title="Permanent link">#</a></h2>
 <p>In this quickstart example, we will create a <em>CANopen Clock</em>. This clock is not a serious application, the example just illustrates the key principles of creating a device using the CANopen Stack.</p>
 <ul>
@@ -1566,7 +1566,8 @@
 </ul>
 <h2 id="clock-spec">Clock Spec<a class="headerlink" href="#clock-spec" title="Permanent link">#</a></h2>
 <p>The main settings of the node are configured inside the <code>CO_NODE_SPEC</code> struct. This struct is not used or modified after initialization is finished. This allows you to declared this structure as a constant.</p>
-<p>Due to the fact, that the central element of a CANopen node is the object dictionary, we start with the description of the specification of our object dictionary. You find the specification in the file <a href="https://github.com/embedded-office/canopen-stm32f7xx/blob/main/src/app/clock_spec.c">src/app/clock_spec.c</a>.</p>
+<p>Due to the fact, that the central element of a CANopen node is the object dictionary, we start with the description of the specification of our object dictionary.</p>
+<p>You find the specification in the file <code>src/app/clock_spec.c</code>.</p>
 <h3 id="object-dictionary">Object Dictionary<a class="headerlink" href="#object-dictionary" title="Permanent link">#</a></h3>
 <h4 id="dictionary-object-array">Dictionary Object Array<a class="headerlink" href="#dictionary-object-array" title="Permanent link">#</a></h4>
 <h5 id="description">Description<a class="headerlink" href="#description" title="Permanent link">#</a></h5>
@@ -1668,13 +1669,13 @@
 <figure>
 <p><img alt="Object Entry Definition" src="../../assets/images/illustrations/canopen-object-entry.svg" title="Object Entry Definition" width="700px" /></p>
 </figure>
-<p>The <code>CO_KEY</code> macro creates out of "<strong>index, subindex</strong>" and the "<strong>property flags</strong>" the unique object entry key, which is used for addressing an object entry. The property flags are a collection of type settings (more details, see in <a href="../../usage/configuration/#property-flags">Configuration / Property Flags</a>). A letter indicates <code>ON</code>, while an underscore (<code>_</code>) at the same place indicates <code>OFF</code>:</p>
+<p>The <code>CO_KEY</code> macro creates out of "<strong>index, subindex</strong>" and the "<strong>property flags</strong>" the unique object entry key, which is used for addressing an object entry. The property flags are a collection of type settings (more details, see in configuration of <a href="../../usage/configuration/#property-flags" title="Configuration of Property Flags">Property Flags</a>). A letter indicates <code>ON</code>, while an underscore (<code>_</code>) at the same place indicates <code>OFF</code>:</p>
 <ul>
 <li><code>RW</code> - The access mode flags (read, write by network)</li>
 <li><code>NAP</code> - The object type flags (node-id considered, asynchronous trigger, PDO mappable)</li>
 <li><code>D</code> - The direct storage flag (used to store the value directly in the object data field)</li>
 </ul>
-<p>The <strong>object type</strong> references the object type functions for this object entry. The <strong>object data</strong> is a pointer to the object entry data (or in some cases a object data structure). What kind of data the object type requires, is listed in <a href="../../usage/configuration/#object-type-interface">Configuration / Object Type Interface</a>.</p>
+<p>The <strong>object type</strong> references the object type functions for this object entry. The <strong>object data</strong> is a pointer to the object entry data (or in some cases a object data structure). What kind of data the object type requires, is listed in configuration of <a href="../../usage/configuration/#object-type-interface" title="Configuration of Object Type Interface">Object Type Interface</a>.</p>
 <p>With this knowledge, the mandatory entries are added with the following lines of code:</p>
 <div class="highlight"><pre><span></span><code><span class="w">  </span><span class="o">:</span><span class="w"></span>
 <span class="p">{</span><span class="n">CO_KEY</span><span class="p">(</span><span class="mh">0x1000</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">CO_OBJ_____R_</span><span class="p">),</span><span class="w"> </span><span class="n">CO_TUNSIGNED32</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">CO_DATA</span><span class="p">)(</span><span class="o">&amp;</span><span class="n">Obj1000_00_20</span><span class="p">)},</span><span class="w"></span>
@@ -1922,7 +1923,7 @@
 </tr>
 </tbody>
 </table>
-<p>How we get these values is explained in section <a href="../../usage/configuration/#pdo-mapping-value">configuration of PDO mapping</a>.</p>
+<p>How we get these values is explained in section configuration of <a href="../../usage/configuration/#pdo-mapping-value" title="Configuration of PDO mapping">PDO mapping</a>.</p>
 <h5 id="implementation_5">Implementation<a class="headerlink" href="#implementation_5" title="Permanent link">#</a></h5>
 <p>This way of defining the payload for PDOs is part of the CiA301 standard and leads us to the following lines in the object dictionary:</p>
 <div class="highlight"><pre><span></span><code><span class="cm">/* allocate variables for constant values in FLASH */</span><span class="w"></span>
@@ -2051,7 +2052,7 @@
 <li>for a hardware timer, and</li>
 <li>for a non-volatile memory</li>
 </ul>
-<p>You find the connection setup in the file <a href="https://github.com/embedded-office/canopen-stm32f7xx/blob/main/src/app/clock_hw.c">src/app/clock_hw.c</a>. The possible drivers are provided in the <code>/driver</code> directions.</p>
+<p>You find the connection setup in the file <code>src/app/clock_hw.c</code>. The possible drivers are provided in the <code>/driver</code> directions.</p>
 <h5 id="implementation_10">Implementation<a class="headerlink" href="#implementation_10" title="Permanent link">#</a></h5>
 <p>You can use a chip-vendor provided HAL for the implementation of the drivers, or use direct register access to perform the required actions - whatever you like. This example project provides drivers, using the ST Microelectronics HAL layer.</p>
 <p>First we select and connect a set of drivers to the CANopen stack:</p>
@@ -2091,7 +2092,7 @@
 <li><em>Application Startup</em>: where initialization of hardware and CANopen layer takes place. The function holds the background loop for processing timer events.</li>
 <li><em>Application Callback</em>: the cyclic started function holding the running application.</li>
 </ul>
-<p>The application for this tiny example is implemented in a single file: <a href="https://github.com/embedded-office/canopen-stm32f7xx/blob/main/src/app/clock_app.c">src/app/clock_app.c</a>.</p>
+<p>The application for this tiny example is implemented in a single file <code>src/app/clock_app.c</code>.</p>
 <h4 id="application-start">Application Start<a class="headerlink" href="#application-start" title="Permanent link">#</a></h4>
 <h5 id="description_11">Description<a class="headerlink" href="#description_11" title="Permanent link">#</a></h5>
 <p>The CANopen Stack needs to setup once during startup. We want to start the CANopen node automatically with the NMT <code>OPERATIONAL</code> mode.</p>

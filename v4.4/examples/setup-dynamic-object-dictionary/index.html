@@ -1200,7 +1200,7 @@
 <p>Projects using CANopen may need to realize an adaptive CANopen Object Dictionary. For example, the CANopen device acts as a standard IO-Device or as a proprietary device - depending on external system settings. In this example, we will discover the needed steps to get a fully dynamic CANopen Object Dictionary for our CANopen Stack.</p>
 <h2 id="functional-specification">Functional Specification<a class="headerlink" href="#functional-specification" title="Permanent link">#</a></h2>
 <p>This example is the first of two writings to achieve a flexible and comfortable way of managing CANopen device software with dynamically generated object dictionaries during runtime.</p>
-<p>The first part describes tool functions for managing the object directory, while the <a href="../use-dynamic-object-dictionary">second part</a> illustrates the usage of the introduced tool functions.</p>
+<p>The first part describes tool functions for managing the object directory, while the <a href="../use-dynamic-object-dictionary" title="Using the Dynamic Object Dictionary">second part</a> illustrates the usage of the introduced tool functions.</p>
 <h3 id="resource-estimation">Resource Estimation<a class="headerlink" href="#resource-estimation" title="Permanent link">#</a></h3>
 <p>The CANopen stack is optimized for minimal resource requirements. The default examples and descriptions assume that you want to minimize the usage of RAM. For this reason, the manuals and templates declare the object dictionary storage as a <code>const</code> array which is placed into FLASH memory.</p>
 <p>For an estimation of how big the difference is, we have a quick look into the manual. The manual explains that each object dictionary entry needs 3 x 32bit values. Therefore, at an object dictionary with 256 object entries, we talk about: 256 * 12 Byte = 3 kByte</p>
@@ -1344,7 +1344,7 @@
 <li>Object Handling (Set, Copy, Swap Compare)</li>
 <li>Object Dictionary Handling (Init, Add &amp; Update)</li>
 </ul>
-<p>We are now ready to go for using these functions in the next example: <a href="../use-dynamic-object-dictionary">Dynamic Object Dictionary - Part II</a>.</p>
+<p>We are now ready to go for using these functions in the next example: <a href="../use-dynamic-object-dictionary" title="Using the Dynamic Object Dictionary">Dynamic Object Dictionary - Part II</a>.</p>
 
 
 

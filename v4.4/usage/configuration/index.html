@@ -1532,7 +1532,7 @@
 <li>The emergency error code [<code>uint16_t</code>] shall be set to the application-specific error code. This error code should be defined acc. the CANopen specification.</li>
 </ul>
 <p>The EMCY handling and object directory manipulations with these definitions is performed by the CANopen stack without further definitions.</p>
-<p>The application is able to register, clear, reset, check and count emergency errors with the provided function API. For details on this API, see Reference Manual [2].</p>
+<p>The application is able to register, clear, reset, check and count emergency errors with the provided function API. For details on this API, see <a href="../../api/emergency" title="Emergency API Functions">API Functions</a>.</p>
 <p>Example:</p>
 <div class="highlight"><pre><span></span><code><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">COEmcyGet</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Node</span><span class="p">.</span><span class="n">Emcy</span><span class="p">,</span><span class="w"> </span><span class="n">APP_EMCY_1</span><span class="p">);</span><span class="w"></span>
 </code></pre></div>
