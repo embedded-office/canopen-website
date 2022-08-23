@@ -8,18 +8,18 @@ description: This CANopen Stack is usable with and without a RTOS. This examples
 This example describes the usage and differences when using the CANopen Stack with an RTOS or within a foreground / background system. The overall architecture of a CANopen device is standardized and shown in the following figure:
 
 <figure markdown>
-  ![CANopen architecture](../assets/images/illustrations/standard-architecture.svg "Standardized CANopen Architecture"){ width=640px }
+  ![CANopen architecture][]{ width=640px }
 </figure>
 
 In this example, only the high-level usage within the component **Your Application** is addressed. We focus the description in the examples to the startup, event service, and CANopen stack processing API functions:
 
-| Function Name          | Description                            |
-| ---------------------- | -------------------------------------- |
-| [`CONodeInit()`][1]    | Initialization of CANopen stack        |
-| [`CONodeStart()`][2]   | Start of CANopen stack                 |
-| [`CONodeProcess()`][3] | Processing of CAN communication        |
-| [`COTmrService()`][4]  | Trigger elapsed configured time quanta |
-| [`COTmrProcess()`][5]  | Processing of timed actions            |
+| Function Name                    | Description                            |
+| -------------------------------- | -------------------------------------- |
+| [`CONodeInit()`][nodeinit]       | Initialization of CANopen stack        |
+| [`CONodeStart()`][nodestart]     | Start of CANopen stack                 |
+| [`CONodeProcess()`][nodeprocess] | Processing of CAN communication        |
+| [`COTmrService()`][tmrservice]   | Trigger elapsed configured time quanta |
+| [`COTmrProcess()`][tmrprocess]   | Processing of timed actions            |
 
 ## CANopen Baremetal
 
@@ -28,7 +28,7 @@ When using the CANopen stack in a foreground / background system, we establish a
 The following figure shows an overview of the application:
 
 <figure markdown>
-  ![CANopen Application without RTOS](../assets/images/illustrations/canopen-without-rtos.svg "CANopen Application without RTOS"){ width=480px }
+  ![CANopen Application without RTOS][]{ width=480px }
 </figure>
 
 The figure shows the hardware components which drives the CANopen stack operation. The **CAN Controller** is the interface to the CAN network. The **Hardware Timer** is the time base for all timed actions of the CANopen stack.
@@ -121,7 +121,7 @@ When using the CANopen stack with an RTOS, we establish a timer interrupt for tr
 The following figure shows an overview of the application:
 
 <figure markdown>
-  ![CANopen Application with RTOS](../assets/images/illustrations/canopen-with-rtos.svg "CANopen Application with RTOS"){ width=480px }
+  ![CANopen Application with RTOS][]{ width=480px }
 </figure>
 
 The figure shows the hardware components which drives the CANopen stack operation. The **CAN controller** is the interface to the CAN network. The **Hardware Timer** is the time base for all timed actions. Within your RTOS, there is most likely a callback function which you can use as time service trigger.
@@ -132,7 +132,7 @@ For the processing of the events we use two separate tasks for **Node Processing
 
 ### RTOS Startup
 
-Let's have a look in the implementation for the [Flexible Safety RTOS][6]. There is no limitation to this RTOS; you can use any RTOS you already have or want.
+Let's have a look in the implementation for the [Flexible Safety RTOS][]. There is no limitation to this RTOS; you can use any RTOS you already have or want.
 
 The following source shows the global variables and the initialization and startup of the CANopen device node.
 
@@ -251,9 +251,22 @@ void AppTmrTask(void *arg)
 ```
 
 
-[1]: ../../api/node/#conodeinit
-[2]: ../../api/node/#conodestart
-[3]: ../../api/node/#conodeprocess
-[4]: ../../api/timer/#cotmrservice
-[5]: ../../api/timer/#cotmrprocess
-[6]: https://www.embedded-office.com/products/flexible-safety-rtos
+
+[canopen architecture]: ../assets/images/illustrations/standard-architecture.svg
+    "Standardized CANopen Architecture"
+[canopen application without rtos]: ../assets/images/illustrations/canopen-without-rtos.svg
+    "CANopen Application without RTOS"
+[canopen application with rtos]: ../assets/images/illustrations/canopen-with-rtos.svg
+    "CANopen Application with RTOS"
+[nodeinit]: ../../api/node/#conodeinit
+    "CONodeInit()"
+[nodestart]: ../../api/node/#conodestart
+    "CONodeStart()"
+[nodeprocess]: ../../api/node/#conodeprocess
+    "CONodeProcess()"
+[tmrservice]: ../../api/timer/#cotmrservice
+    "COTmrService()"
+[tmrprocess]: ../../api/timer/#cotmrprocess
+    "COTmrProcess()"
+[flexible safety rtos]: https://www.embedded-office.com/products/flexible-safety-rtos
+    "Flexible Safety RTOS"

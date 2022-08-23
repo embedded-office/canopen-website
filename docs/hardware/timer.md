@@ -14,7 +14,7 @@ As a source for CANopen timer management, we need some kind of interrupt which i
 In this mode, a periodic interrupt source is (re-)used. The period time of the interrupts represents the granularity for the generation of needed time intervals.
 
 <figure markdown>
-![Time Generation in Cyclic Mode](../assets/images/illustrations/timer-cyclic-mode.svg "Time Generation in Cyclic Mode"){ width=480px }
+  ![Time Generation in Cyclic Mode][cyclic mode]{ width=480px }
 </figure>
 
 - no dedicated hardware timer required
@@ -26,7 +26,7 @@ In this mode, a periodic interrupt source is (re-)used. The period time of the i
 In this mode, a hardware timer is used as a source for the interrupts. The input clock frequency of the timer represents the granularity for the generation of needed time intervals.
 
 <figure markdown>
-![Time Generation in Delta Mode](../assets/images/illustrations/timer-delta-mode.svg "Time Generation in Delta Mode"){ width=480px }
+  ![Time Generation in Delta Mode][delta mode]{ width=480px }
 </figure>
 
 - interrupt occurs only when needed
@@ -165,3 +165,10 @@ To keep the drivers organized, we put the implementation in a file which follows
 ### Timer Driver Template
 
 The files `/driver/source/co_timer_dummy.c` and `/driver/include/co_timer_dummy.h` are templates for timer drivers.
+
+
+
+[cyclic mode]: ../assets/images/illustrations/timer-cyclic-mode.svg
+    "Time Generation in Cyclic Mode"
+[delta mode]: ../assets/images/illustrations/timer-delta-mode.svg
+    "Time Generation in Delta Mode"

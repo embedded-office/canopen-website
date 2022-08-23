@@ -10,7 +10,7 @@ description: The CANopen Stack library implementes the standardized architecture
 The architecture of a CANopen device is standardized and shown in the following figure:
 
 <figure markdown>
-  ![CANopen architecture](../assets/images/illustrations/standard-architecture.svg "Standardized CANopen Architecture"){ width=640px }
+  ![CANopen architecture][]{ width=640px }
 </figure>
 
 ### Object Dictionary
@@ -46,7 +46,7 @@ The *Communication Unit (CU)* uses the OD to set and get configuration settings,
 The *Network Management State Machine (NMT)* of all CANopen devices within a CANopen network is controlled by the CANopen network master. The following state machine is specified:
 
 <figure markdown>
-  ![NMT States](../assets/images/illustrations/nmt-statemachine.svg "NMT States"){ width=480px }
+  ![NMT States][]{ width=480px }
 </figure>
 
 Within this state machine, the state transitions with a number (e.g. [129]) will be activated with a network management command equal to this number. If no transition criteria is stated, the transition will be activated after finished state operations automatically. The following table summarizes the network management commands:
@@ -72,3 +72,10 @@ These NMT commands used by the CANopen network boot-up master to control the net
 | PDO Transfer      |      |         | X           |      |
 
 Note: The Boot-Up message is sent only once during the transition from *Initialization* to *Pre-Operational*.
+
+
+
+[canopen architecture]: ../assets/images/illustrations/standard-architecture.svg
+    "Standardized CANopen Architecture"
+[nmt states]: ../assets/images/illustrations/nmt-statemachine.svg
+    "NMT States"

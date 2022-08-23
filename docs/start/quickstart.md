@@ -5,9 +5,9 @@ description: The quickstart example describes in detail the steps to a running C
 
 # Quickstart
 
-The quickstart example describes in detail the steps to build a CANopen node. The source files are included in the example repository [canopen-stm32f7xx][1]. To get most out of this article, you should clone this repository and follow in the real files during reading this article.
+The quickstart example describes in detail the steps to build a CANopen node. The source files are included in the example repository [canopen-stm32f7xx][]. To get most out of this article, you should clone this repository and follow in the real files during reading this article.
 
-For setting up the hardware and software environment, please follow the `README.md` in the root of the example repository [canopen-stm32f7xx][1].
+For setting up the hardware and software environment, please follow the `README.md` in the root of the example repository [canopen-stm32f7xx][].
 
 ## Functional Specification
 
@@ -22,7 +22,7 @@ In this quickstart example, we will create a *CANopen Clock*. This clock is not 
 The following figure shows the layered architecture of the CANopen Clock device and the related directories.
 
 <figure markdown>
-  ![architectural overview](../assets/images/illustrations/quickstart-architecture.svg "Architectural Overview"){ width=700px }
+  ![architectural overview][]{ width=700px }
 </figure>
 
 
@@ -38,7 +38,9 @@ The directory `src/app/...` contains three modules:
 
 The main settings of the node are configured inside the `CO_NODE_SPEC` struct. This struct is not used or modified after initialization is finished. This allows you to declared this structure as a constant.
 
-Due to the fact, that the central element of a CANopen node is the object dictionary, we start with the description of the specification of our object dictionary. You find the specification in the file [src/app/clock_spec.c][2].
+Due to the fact, that the central element of a CANopen node is the object dictionary, we start with the description of the specification of our object dictionary.
+
+You find the specification in the file `src/app/clock_spec.c`.
 
 ### Object Dictionary
 
@@ -87,16 +89,16 @@ When we want to achieve compliance with the CiA301 specification, the object dic
 The configuration of each object entry is a single configuration line within the object dictionary `CO_OBJ` array. The following figure shows how a single line is constructed:
 
 <figure markdown>
-  ![Object Entry Definition](../assets/images/illustrations/canopen-object-entry.svg "Object Entry Definition"){ width=700px }
+  ![Object Entry Definition][]{ width=700px }
 </figure>
 
-The `CO_KEY` macro creates out of "**index, subindex**" and the "**property flags**" the unique object entry key, which is used for addressing an object entry. The property flags are a collection of type settings (more details, see in [Configuration / Property Flags](../../usage/configuration/#property-flags)). A letter indicates `ON`, while an underscore (`_`) at the same place indicates `OFF`:
+The `CO_KEY` macro creates out of "**index, subindex**" and the "**property flags**" the unique object entry key, which is used for addressing an object entry. The property flags are a collection of type settings (more details, see in configuration of [Property Flags][]). A letter indicates `ON`, while an underscore (`_`) at the same place indicates `OFF`:
 
 - `RW` - The access mode flags (read, write by network)
 - `NAP` - The object type flags (node-id considered, asynchronous trigger, PDO mappable)
 - `D` - The direct storage flag (used to store the value directly in the object data field)
 
-The **object type** references the object type functions for this object entry. The **object data** is a pointer to the object entry data (or in some cases a object data structure). What kind of data the object type requires, is listed in [Configuration / Object Type Interface](../../usage/configuration/#object-type-interface).
+The **object type** references the object type functions for this object entry. The **object data** is a pointer to the object entry data (or in some cases a object data structure). What kind of data the object type requires, is listed in configuration of [Object Type Interface][].
 
 With this knowledge, the mandatory entries are added with the following lines of code:
 
@@ -255,7 +257,7 @@ The mapping settings for the TPDO must contain the following object entries:
 | 1A00h:02  | UNSIGNED32 | Const  | 21000208h | - map:  8-bit clock minute |
 | 1A00h:03  | UNSIGNED32 | Const  | 21000308h | - map:  8-bit clock second |
 
-How we get these values is explained in section [configuration of PDO mapping](../../usage/configuration/#pdo-mapping-value).
+How we get these values is explained in section configuration of [PDO mapping][].
 
 ##### Implementation
 
@@ -419,7 +421,7 @@ For connecting a CANopen node to the microcontroller hardware, you need three dr
 - for a hardware timer, and
 - for a non-volatile memory
 
-You find the connection setup in the file [src/app/clock_hw.c][4]. The possible drivers are provided in the `/driver` directions.
+You find the connection setup in the file `src/app/clock_hw.c`. The possible drivers are provided in the `/driver` directions.
 
 ##### Implementation
 
@@ -473,7 +475,7 @@ The CANopen application is realized in functions, reflecting two phases of the a
 - *Application Startup*: where initialization of hardware and CANopen layer takes place. The function holds the background loop for processing timer events.
 - *Application Callback*: the cyclic started function holding the running application.
 
-The application for this tiny example is implemented in a single file: [src/app/clock_app.c][5].
+The application for this tiny example is implemented in a single file `src/app/clock_app.c`.
 
 #### Application Start
 
@@ -573,8 +575,16 @@ static void AppClock(void *p_arg)
     The last write access with `COObjWrValue()` triggers the asynchronous transmission of the PDO, because the corresponding object entry is defined with the object property flag `A`.
 
 
-[1]: https://github.com/embedded-office/canopen-stm32f7xx
-[2]: https://github.com/embedded-office/canopen-stm32f7xx/blob/main/src/app/clock_spec.c
-[3]: ../usage/configuration#pdo-mapping-value
-[4]: https://github.com/embedded-office/canopen-stm32f7xx/blob/main/src/app/clock_hw.c
-[5]: https://github.com/embedded-office/canopen-stm32f7xx/blob/main/src/app/clock_app.c
+
+[architectural overview]: ../assets/images/illustrations/quickstart-architecture.svg
+    "Architectural Overview"
+[object entry definition]: ../assets/images/illustrations/canopen-object-entry.svg
+    "Object Entry Definition"
+[canopen-stm32f7xx]: https://github.com/embedded-office/canopen-stm32f7xx
+    "Repository: canopen-stm32f7xx"
+[pdo mapping]: ../../usage/configuration/#pdo-mapping-value
+    "Configuration of PDO mapping"
+[property flags]: ../../usage/configuration/#property-flags
+    "Configuration of Property Flags"
+[object type interface]: ../../usage/configuration/#object-type-interface
+    "Configuration of Object Type Interface"

@@ -11,7 +11,7 @@ Projects using CANopen may need to realize an adaptive CANopen Object Dictionary
 
 This example is the first of two writings to achieve a flexible and comfortable way of managing CANopen device software with dynamically generated object dictionaries during runtime.
 
-The first part describes tool functions for managing the object directory, while the [second part][1] illustrates the usage of the introduced tool functions.
+The first part describes tool functions for managing the object directory, while the [second part][second part] illustrates the usage of the introduced tool functions.
 
 
 ### Resource Estimation
@@ -21,7 +21,7 @@ The CANopen stack is optimized for minimal resource requirements. The default ex
 For an estimation of how big the difference is, we have a quick look into the manual. The manual explains that each object dictionary entry needs 3 x 32bit values. Therefore, at an object dictionary with 256 object entries, we talk about: 256 * 12 Byte = 3 kByte
 
 <figure markdown>
-  ![CANopen Dictionary Memory Estimation](../assets/images/illustrations/canopen-dictionary-memory.svg "CANopen Dictionary Memory Estimation"){ width=480px }
+  ![CANopen Dictionary Memory Estimation][memory estimation]{ width=480px }
 </figure>
 
 In case of a static object dictionary, the CANopen stack stores the entire dictionary (including pointers to the changing data) in non-volatile memory. On the dynamic side, the CANopen stack stores the object dictionary in RAM, along with the changing data. The use of pointers to the changing data is optional.
@@ -200,7 +200,11 @@ That's it. Now we have a set of functions for managing the object dictionary. Th
 * Object Handling (Set, Copy, Swap Compare)
 * Object Dictionary Handling (Init, Add & Update)
 
-We are now ready to go for using these functions in the next example: [Dynamic Object Dictionary - Part II][1].
+We are now ready to go for using these functions in the next example: [Dynamic Object Dictionary - Part II][second part].
 
 
-[1]: ../use-dynamic-object-dictionary
+
+[memory estimation]: ../assets/images/illustrations/canopen-dictionary-memory.svg
+    "CANopen Dictionary Memory Estimation"
+[second part]: ../use-dynamic-object-dictionary
+    "Using the Dynamic Object Dictionary"

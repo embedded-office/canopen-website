@@ -47,9 +47,9 @@ sequenceDiagram
 
 The Callback functions are documented in the CANopen usage category Callback:
 
-| Category                | Content                               |
-| ----------------------- | ------------------------------------- |
-| [Callback Interface][1] | description of all callback functions |
+| Category               | Content                               |
+| ---------------------- | ------------------------------------- |
+| [Callback Interface][] | description of all callback functions |
 
 ### Internal request
 
@@ -70,18 +70,26 @@ The API functions are documented in some categories within the chapter API Funct
 
 | Category                | Content                                                    |
 | ----------------------- | ---------------------------------------------------------- |
-| [CANopen Node][2]       | controlling the node (init, start, stop, etc. )            |
-| [Object Dictionary][3]  | basic reading and writing in the object dictionary         |
-| [EMCY Handling][4]      | handle and communicate emergency errors (set, clear, etc.) |
-| [Network Management][5] | local network management (set/get modes, node-ID, etc.)    |
-| [Object Entry][6]       | read and write object entries of any type and size         |
-| [TPDO Event][7]         | triggering the transmission of TPDO                        |
+| [CANopen Node][]        | controlling the node (init, start, stop, etc. )            |
+| [Object Dictionary][]   | basic reading and writing in the object dictionary         |
+| [EMCY Handling][]       | handle and communicate emergency errors (set, clear, etc.) |
+| [Network Management][]  | local network management (set/get modes, node-ID, etc.)    |
+| [Object Entry][]        | read and write object entries of any type and size         |
+| [TPDO Event][]          | triggering the transmission of TPDO                        |
 
 
-[1]: ../callbacks
-[2]: ../../api/node
-[3]: ../../api/dictionary
-[4]: ../../api/emergency
-[5]: ../../api/network
-[6]: ../../api/object
-[7]: ../../api/tpdo
+
+[callback interface]: ../callbacks
+    "Callback Interface"
+[canopen node]: ../../api/node
+    "Controlling the Node"
+[object dictionary]: ../../api/dictionary
+    "Using Object Dictionary"
+[emcy handling]: ../../api/emergency
+    "Emergency Errors"
+[network management]: ../../api/network
+    "Network Management"
+[object entry]: ../../api/object
+    "Object Entry"
+[tpdo event]: ../../api/tpdo
+    "Transmit PDO"

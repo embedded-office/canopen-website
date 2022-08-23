@@ -221,7 +221,7 @@ The following descriptions explains the details of the table members:
 
 The EMCY handling and object directory manipulations with these definitions is performed by the CANopen stack without further definitions.
 
-The application is able to register, clear, reset, check and count emergency errors with the provided function API. For details on this API, see Reference Manual [2].
+The application is able to register, clear, reset, check and count emergency errors with the provided function API. For details on this API, see [API Functions][].
 
 Example:
 
@@ -339,7 +339,7 @@ The object data reference [`CO_DATA`] shall be set in dependence to the object t
 For the PDO mapping object entries, we must encode the object data value in the following way:
 
 <figure markdown>
-  ![PDO Mapping](../assets/images/illustrations/pdo-mapping.svg "PDO Mapping Concept"){ width=700px }
+  ![PDO Mapping][]{ width=700px }
 </figure>
 
 You can use the macro `CO_LINK` to get the value in a readable way:
@@ -454,3 +454,10 @@ void StartNode (void)
   }
 };
 ```
+
+
+
+[pdo mapping]: ../assets/images/illustrations/pdo-mapping.svg
+      "PDO Mapping Concept"
+[api functions]: ../../api/emergency
+      "Emergency API Functions"
