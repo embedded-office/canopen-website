@@ -58,7 +58,7 @@ CO_ERR FwCtrlWrite(CO_OBJ *obj, CO_NODE *node, void *buffer, uint32_t size)
   uint32_t command = *((uint32_t *)buffer);
   CO_ERR   result  = CO_ERR_TYPE_WR;
 
-  if (command == '0xdeadbeef') {
+  if (command == 0xdeadbeef) {
 
     /* erase your firmware region in FLASH here */
 
@@ -91,7 +91,7 @@ const CO_OBJ_TYPE FwImage = { FwImageSize, FwImageInit, 0, FwImageWrite };
 We want to allow uploading firmware images which are smaller than whole FLASH domain area. For this reason, we return the given width of the started firmware upload sequence as size of this domain.
 
 ```c
-uint32_t FwImageSize(CO_OBJ *obj, CO_NODE *node, uint32_t width);
+uint32_t FwImageSize(CO_OBJ *obj, CO_NODE *node, uint32_t width)
 {
   CO_OBJ_DOM *domain = (CO_OBJ_DOM*)(obj->Data);
   uint32_t    size   = domain->Size;
@@ -123,7 +123,7 @@ CO_ERR FwImageInit(CO_OBJ *obj, CO_NODE *node)
 The core of the firmware image write function is your project specific FLASH write function. The required basic information for calling your function are managed by the stack.
 
 ```c
-CO_ERR FwImageWrite(CO_OBJ *obj, CO_NODE *node, void *buffer, uint32_t size);
+CO_ERR FwImageWrite(CO_OBJ *obj, CO_NODE *node, void *buffer, uint32_t size)
 {
   CO_OBJ_DOM *domain  = (CO_OBJ_DOM*)(obj->Data);
   CO_ERR      result  = CO_ERR_TYPE_WR;
@@ -133,9 +133,9 @@ CO_ERR FwImageWrite(CO_OBJ *obj, CO_NODE *node, void *buffer, uint32_t size);
   /* use your FLASH driver for writing the buffer to given address, e.g.: */
   success = MyFlashDriverWrite(address, (uint8_t *buffer), size);
 
-  if (success)
+  if (success) {
     domain->Offset += size;
-    result = CO_ERR_NONE
+    result = CO_ERR_NONE;
   }
 
   return (result);
